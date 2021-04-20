@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 
 // set routes
 app.use('/', views);
-app.use('/static', express.static('static'));
+app.use('/static', express.static('public'));
 app.use('/', express.static('dist'));
 
 // 404 route
