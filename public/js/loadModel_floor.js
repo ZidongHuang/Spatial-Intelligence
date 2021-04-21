@@ -40,7 +40,7 @@ scene.highlightMaterial.edgeWidth = 2;
 
 var floorGroup2 = new xeogl.GLTFModel({
     id: "floors",
-    src: "/static/models/floor5.gltf",
+    src: "/static/models/floor.gltf",
     scale: [scale, scale, scale],
     edgeThreshold: 20,
     opacity: 1.0,

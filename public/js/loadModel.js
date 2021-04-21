@@ -80,7 +80,7 @@ var input = scene.input;
 
 var floorGroup = new xeogl.GLTFModel({
     id: "floors",
-    src: "/static/models/floor5.gltf",
+    src: "/static/models/floor.gltf",
     scale: [scale, scale, scale],
     edgeThreshold: 20,
     opacity: 0.9,
