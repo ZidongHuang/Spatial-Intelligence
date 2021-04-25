@@ -1,1 +1,0 @@
-web: npm install -g @aws-amplify/cli --unsafe-perm=true  && npm start
