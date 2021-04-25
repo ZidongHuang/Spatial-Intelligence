@@ -1,1 +1,1 @@
-web: npm install && npm install -g nodemon && npm start
+web: npm install -g @aws-amplify/cli --unsafe-perm=true  && npm start
