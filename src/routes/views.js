@@ -15,4 +15,7 @@ router.get('/floors', function(req, res) {
   res.sendFile('floors.html', { root: 'src/views' });
 });
 
+router.get('/flow', function(req, res) {
+  res.sendFile('flow.html', { root: 'src/views' });
+});
 module.exports = router;
