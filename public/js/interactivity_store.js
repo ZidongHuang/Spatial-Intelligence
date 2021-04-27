@@ -8,6 +8,7 @@ var booth2store={};
 var store_names={}
 var all_data_in_floor={}
 var cnt=0
+var property_id = "beijing_hopson_one"
 const color_platter= ['#630063','#FF0091','#FF7D91','#FFAB91','#bdbdbd'];
 
 const id2height={
@@ -30,7 +31,7 @@ $('#datetime-body').append($('<input>',{
 
 
 
-$.post(apisUrl + '/get_available_date', function(data, textStatus, jqXHR){
+$.post(apisUrl + '/get_available_date', {'property_id': property_id}, function(data, textStatus, jqXHR){
     $('#datetime-body').daterangepicker({minDate:moment(data[0].start_date),
                                          maxDate:moment(data[0].end_date),
                                          timePicker: true, 
@@ -38,7 +39,7 @@ $.post(apisUrl + '/get_available_date', function(data, textStatus, jqXHR){
                                          alwaysShowCalendars: false})
 });
 
-$.post(apisUrl + '/get_store_info', function(data, textStatus, jqXHR){
+$.post(apisUrl + '/get_store_info', {'property_id': property_id}, function(data, textStatus, jqXHR){
     console.log(textStatus);
     for (let i=0;i<data.length;i++){
         store_names[data[i].store_berth]=data[i].store_name
@@ -80,7 +81,7 @@ function loadRangeData(startDateTime,endDateTime,store_id){
     console.log("search btwn: ",startDateTime,endDateTime)
     
 
-    $.post(apisUrl + '/get_store_kpis2', {'start_time': startDateTime, 'end_time': endDateTime, 'store_id': store_id}, function(data, textStatus, jqXHR){
+    $.post(apisUrl + '/get_store_kpis2', {'start_time': startDateTime, 'end_time': endDateTime, 'store_id': store_id,'property_id': property_id}, function(data, textStatus, jqXHR){
         if (textStatus=='success'){
             // console.log('data requested!');
 

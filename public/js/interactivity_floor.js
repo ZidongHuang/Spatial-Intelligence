@@ -5,6 +5,7 @@ var startDateTime='';
 var endDateTime='';
 var booth2store={};
 var store2booth={};
+var property_id= 'property_id'
 // var stores_on_floor={}
 // var display_data={}
 
@@ -49,7 +50,7 @@ var button1=$('#button-explode').append($('<button>',{
 }));
 
 
-$.post(apisUrl + '/get_available_date', function(data, textStatus, jqXHR){
+$.post(apisUrl + '/get_available_date', {'property_id': property_id},function(data, textStatus, jqXHR){
     $('#datetime-body').daterangepicker({minDate:moment(data[0].start_date),
                                          maxDate:moment(data[0].end_date),
                                          timePicker: true, 
@@ -57,7 +58,7 @@ $.post(apisUrl + '/get_available_date', function(data, textStatus, jqXHR){
                                          alwaysShowCalendars: false})
 });
 
-$.post(apisUrl + '/get_store_info', function(data, textStatus, jqXHR){
+$.post(apisUrl + '/get_store_info', {'property_id': property_id},function(data, textStatus, jqXHR){
     for (let i=0;i<data.length;i++){
         store2booth[data[i].store_name]=data[i].store_berth
     }
@@ -166,7 +167,7 @@ function loadRangeData(startDateTime,endDateTime,floor_id){
     // console.log("search btwn: ",startDateTime,endDateTime)
     // console.log("search floor: ",floor_id)
 
-    $.post(apisUrl + '/get_floor_kpis', {'start_time': startDateTime, 'end_time': endDateTime, 'floor_id': "'"+floor_id+"'"}, function(data, textStatus){
+    $.post(apisUrl + '/get_floor_kpis', {'property_id': property_id,'start_time': startDateTime, 'end_time': endDateTime, 'floor_id': "'"+floor_id+"'"}, function(data, textStatus){
         if (textStatus=='success'){
 
             $('#chart-title').append("<ul id='title'>")
