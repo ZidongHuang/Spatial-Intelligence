@@ -133,7 +133,7 @@ d3.json("/static/json/test.json", function(energy) {
         particles[x].current = currentTime * 0.15 * particles[x].speed;
         var currentPos = particles[x].path.getPointAtLength(particles[x].current);
         context.beginPath();
-      context.fillStyle = particles[x].link.particleColor(10);
+      context.fillStyle = particles[x].link.particleColor(1);
         context.arc(currentPos.x,currentPos.y + particles[x].offset,particles[x].link.particleSize,0,2*Math.PI);
         context.fill();
     }
