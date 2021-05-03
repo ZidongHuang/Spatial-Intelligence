@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<!--
+//flag = 7/4 Wed afternoon
+//newest version with: dynamic scaling, single tooltip, complete dropdown, chained tooltip, click to stay
+//pending: vertical zoom
+-->
+
+<html>
+
+<head>
+<meta charset="utf-8">
+<!-- Load D3.js v5 -->
+<script src='https://d3js.org/d3.v5.min.js'></script>
+<!-- Load jQuery.js, great for selecting (and subsequently manipualting) objects on the page -->
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+<!-- Load Underscore.js, a utility library for operating on arrays (filter, sort, min, max) -->
+<script src='/static/js/a4_underscore.js'></script>
+<!-- Load Bootstrap's stylesheet (CSS). It defines the default style of, among other things, the dropdown menu -->
+<link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.4/css/bootstrap.min.css' rel='stylesheet'>
+<!-- Load Ion's rangeSlider.js, to create and style a range slider -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+<!-- Load the default stylesheet (CSS) for the slider -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/css/ion.rangeSlider.min.css"/>
+<link rel="stylesheet" href="/static/css/a4_main.css"/>
+<link rel="stylesheet" href="/static/css/a4_toggle.css"/>
+
+<!-- header footer css -->
+<link href="/static/css/cover.css" rel="stylesheet">
+<link href="/static/css/bootstrap.min.css" rel="stylesheet">
+<link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
+
+
+</head>
+
+
+    <body class="d-flex h-100 text-center text-white bg-dark">
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+            <!------------------------ header ------------------------->
+            <header class="mb-auto">
+                <div>
+                <h3 class="float-md-start mb-0">Spatial Intelligence</h3>
+                <nav class="nav nav-masthead justify-content-center float-md-end">
+                    <a class="nav-link" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" href="/data">Data</a>
+                    <a class="nav-link" href="/stores">Model</a>
+                </nav>
+                </div>
+            </header>
+        
+            <!------------------------ main content ------------------------->
+            <!-- A div contaimer for the customer type selector dropdown menu -->
+            <div id='toolbar'></div>
+
+            <div id= 'legend'>
+                <svg id ='legend_type_color' width = '1000' height = '30'>
+                <g class = 'legendgroup' id = 'legend_type_color' text-anchor = 'start'
+                font-family = 'sans-serif' font-size = '14' 
+                transform = 'translate (70,0)' >
+                    <g transform = 'translate (-70,0)'>
+                        <text dominant-baseline = 'central' x= '25' y= '10'>Type:</text>
+                    </g>
+                    <g transform = 'translate (20,0)'>
+                        <rect width = '15' height ='15' fill ='#FF5851'></rect>
+                        <text dominant-baseline = 'central' x= '35' y= '10'>fashion</text>
+                        </g>
+                    <g transform = 'translate (140,0)'>
+                        <rect width = '15' height ='15' fill ='#414A6B'></rect>
+                        <text dominant-baseline = 'central' x= '25' y= '10'>accessories</text>
+                        </g>
+                    <g transform = 'translate (260,0)'>
+                        <rect width = '15' height ='15' fill ='#044013'></rect>
+                        <text dominant-baseline = 'central' x= '45' y= '10'>food</text>
+                        </g>
+                    <g transform = 'translate (380,0)'>
+                        <rect width = '15' height ='15' fill ='#B49A85'></rect>
+                        <text dominant-baseline = 'central' x= '35' y= '10'>jewelry</text>
+                        </g>
+                    <g transform = 'translate (500,0)'>
+                            <rect width = '15' height ='15' fill ='#F3C130'></rect>
+                            <text dominant-baseline = 'central' x= '25' y= '10'>kids_babies</text>
+                            </g>
+                    <g transform = 'translate (620,0)'>
+                            <rect width = '15' height ='15' fill ='#1C1B20'></rect>
+                            <text dominant-baseline = 'central' x= '35' y= '10'>consumer_electronics</text>
+                </g>
+
+                </svg>
+            </div>
+
+            <div id = 'button' style='width:1500px;'>
+                <button type="button" id = "clear_button" class = 'button001' onclick = "clearView();" style='position:absolute; left: 800px; top: 920px; text-align: center'>Clear All Selection</button>
+
+                <!-- <button title="Hello World!">Sample Button</button> -->
+
+                <label class="switch" style='position:absolute; left: 650px; top: 920px' title="To compare the rates of different labels!" alt="To compare the rates of different labels!">
+                <input type="checkbox" id="togBtn">
+                <div class="slider round" onclick = "toggle()">
+                <!--ADDED HTML -->
+                <span class="on">Comparison On</span>
+                <span class="off">Comparison Off</span>
+                <!--END-->
+                </div>
+                </label>
+            </div>
+
+            <div id = 'legend_bubble' width = '1500' height = '100'>
+            <svg id ='legend_bubble_size' width = '1500' height = '50'>
+                <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
+                font-family = 'Tekton Pro' font-size = '14'
+                transform = 'translate (70,0)' >
+                <g transform = 'translate (-70,0)'>
+                <text dominant-baseline = 'central' x= '25' y= '20'>Customer Volume count:</text>
+                </g>
+                <g transform = 'translate (150,0)'>
+                <circle cx = '0' cy ='20' r = '3' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                <text dominant-baseline = 'central' x= '40' y= '20'>below 100</text>
+                </g>
+                <g transform = 'translate (300,0)'>
+                <circle cx = '0' cy ='20' r = '6' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                <text dominant-baseline = 'central' x= '25' y= '20'>100 to 500</text>
+                </g>
+                <g transform = 'translate (450,0)'>
+                <circle cx = '0' cy ='20' r = '10' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                    <text dominant-baseline = 'central' x= '25' y= '20'>500 to 1000</text>
+                    </g>
+                <g transform = 'translate (600,0)'>
+                <circle cx = '0' cy ='20' r = '13' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                <text dominant-baseline = 'central' x= '25' y= '20'>1000 and more</text>
+                </g>
+            </svg>
+            </div>
+
+            <div id = 'legend_bubble' width = '1500' height = '100'>
+            <svg id ='legend_bubble_size' width = '1500' height = '50'>
+                <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
+                font-family = 'Tekton Pro' font-size = '14'
+                transform = 'translate (70,0)' >
+                <g transform = 'translate (-70,0)'>
+                <text dominant-baseline = 'central' x= '25' y= '20'>
+                    Note: female_rate + male_rate = 1; teenager_rate + youth_rate + middle-aged_rate + senior_rate = 1 </text>
+                </g>
+            </svg>
+            </div>
+
+            <!-- A div container for the main visualization -->
+            <div id='vis' style='width:1500px;' class="">
+                <!-- <svg class='chart-outer'><g class='chart'></g></svg> -->
+            </div>
+
+            <div style = 'text-align: center; width: 1500px'>
+                <h4 style = 'color :rgb(41, 41, 41); font-size : 10px'>*The dataset is collected by PlaceInt from Hopson.</h4>
+            </div>
+
+            <script type="text/javascript" src="/static/js/a4_viz.js"></script>
+
+
+            <!------------------------------- footer ---------------------------->
+            <footer class="mt-auto text-white-50">
+                <p>Data credit: Beijing Chaoyang Hopson One by <a href="https://www.placeint.net/" class="text-white">@placeint</a>.</p>
+            </footer>
+            </div>  
+  
+
+    </body>
+
+
+
+</html>
+
+<!-- <div class='form-group'>
+  <label for='franchise-var'>Label of Customer:</label>
+  <select class='form-control' id='franchise-var'>
+    <option value = "All" selected>All</option>
+  </select>
+</div> -->

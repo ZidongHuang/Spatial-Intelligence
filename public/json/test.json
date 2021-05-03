@@ -1,0 +1,30 @@
+{"nodes":
+  [
+    {"name":"Male Figure"},
+    {"name":"Female Figure"},
+    {"name":"Fashion"},
+    {"name":"Accessories"},
+    {"name":"Food"},
+    {"name":"Jewelry"},
+    {"name":"Kids_babies"},
+    {"name":"Consumer_electronics"}
+
+  ],
+
+"links":
+  [
+    {"source":0,"target":2,"value":300},
+    {"source":0,"target":3,"value":100},
+    {"source":0,"target":4,"value":200},
+    {"source":0,"target":5,"value":100},
+    {"source":0,"target":6,"value":100},
+    {"source":0,"target":7,"value":200},
+
+    {"source":1,"target":2,"value":350},
+    {"source":1,"target":3,"value":250},
+    {"source":1,"target":4,"value":200},
+    {"source":1,"target":5,"value":100},
+    {"source":1,"target":6,"value":100},
+    {"source":1,"target":7,"value":100}
+
+  ]}
