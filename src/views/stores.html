@@ -30,6 +30,10 @@
         <link href="/static/css/annotation-style.css" rel="stylesheet"/>
         <link href="/static/css/daterangepicker.css" rel="stylesheet"/> 
         <link href="/static/css/apexcharts.css" rel="stylesheet"/> 
+        <!-- header footer css -->
+        <link href="/static/css/cover.css" rel="stylesheet">
+        <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
 
         <style> 
             #mySelect {
@@ -44,6 +48,20 @@
 
     </head>
     <body>
+        <body class="d-flex h-100 text-center text-white bg-dark">
+            <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+                <!------------------------ header ------------------------->
+                <header class="mb-auto">
+                    <div>
+                    <h3 class="float-md-start mb-0">Spatial Intelligence</h3>
+                    <nav class="nav nav-masthead justify-content-center float-md-end">
+                        <a class="nav-link" aria-current="page" href="/">Home</a>
+                        <a class="nav-link" href="/data">Data</a>
+                        <a class="nav-link active" href="/stores">Model</a>
+                    </nav>
+                    </div>
+                </header>
+        <!------------------------ main content ------------------------->    
         <div class="panel panel-default" id="left-panel-container">
             <div class="container-fluid" id="panel-body">
                 <div class="row" style="height: 35%; padding-bottom: 15px">
@@ -78,6 +96,13 @@
         <script src='/static/js/loadModel_store.js'></script>
         <script src='/static/js/interactivity_store.js'></script>
 
+        </div>  
+
+        <!------------------------------- footer ---------------------------->
+        <!-- <footer class="mt-auto text-white-50">
+            <p>Data credit: Beijing Chaoyang Hopson One by <a href="https://www.placeint.net/" class="text-white">@placeint</a>.</p>
+        </footer> -->
+        </div>
     </body>
 </html>
 
