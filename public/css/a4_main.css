@@ -1,0 +1,286 @@
+  /* This is an example of a CSS comment (only used within the style section) */
+
+  /* Import the Baloo Thambi font from Google Fonts  */
+  @import url('https://fonts.googleapis.com/css?family=Baloo+Thambi');
+
+  .form-group {
+    display: inline-block;
+    margin-right: 10px;
+  }
+
+  .form-control {
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    width: 375;
+  }
+
+  * {
+    margin:0;
+    padding:0;
+    font-family: Tekton Pro;
+  }
+
+  h1 {
+    font-size:150px sans-serif;
+    margin-left: 10px;
+    line-height:0.8em;
+    font-weight: bold;
+    font-family: Tekton Pro;
+  }
+
+  h2 {
+    font: 15px sans-serif;
+    margin-left: 10px;
+    line-height:0.2em;
+    font-weight: bold;
+    font-family: Tekton Pro;
+  }
+
+  p {
+    fill: #8FA2AC;
+    font-family: Tekton Pro;
+    font-size: 12px;
+  }
+
+  .axis text {
+    fill: #8FA2AC;
+    font: 12px sans-serif;
+    font-family: Tekton Pro;
+  }
+
+  .axis_title {
+    fill: #8FA2AC;
+    text-anchor: middle;
+    font-family: Tekton Pro;
+  }
+
+  .axis path,
+  .axis line {
+    fill: none;
+    stroke: #8FA2AC;
+    shape-rendering: crispEdges;
+    stroke-opacity: 0.4;
+  }
+
+  .chart {
+    font-family: helvetica;
+  }
+
+  .date_marker {
+    stroke-width: 1px;
+  }
+
+  .date_label_top {
+    fill: #8FA2AC;
+    text-anchor: middle;
+    font-family: Tekton Pro;
+  }
+
+  .date_label_bottom {
+    fill: #8FA2AC;
+    text-anchor: middle;
+    font-family: Tekton Pro;
+  }
+
+  .circle_legend {
+    fill: none;
+  }
+
+  .circle_text {
+    fill: #8FA2AC;
+    font-family: Tekton Pro;
+  }
+
+  .tooltip {
+    border-radius: 10px;
+    padding: 10px;
+    position: absolute;
+    color: #FFF;
+    background-color: #222;
+    opacity: .9;
+    z-index: 1;
+    font-family: Tekton Pro;
+  }
+
+  .irs--round .irs-line {
+     top: 36px;
+     height: 4px;
+     background-color: #E3E9ED;
+     border-radius: 4px;
+  }
+  .irs--round .irs-bar {
+     top: 36px;
+     height: 4px;
+     background-color: #205072;
+  }
+  .irs--round .irs-handle {
+     top: 26px;
+     width: 24px;
+     height: 24px;
+     border: 4px solid #205072;
+     background-color: white;
+     border-radius: 24px;
+     box-shadow: 0 1px 3px rgba(0, 0, 255, 0.3);
+  }
+  .irs--round .irs-handle.state_hover,
+  .irs--round .irs-handle:hover {
+    background-color: #b3cde0;
+  }
+  .irs--square .irs-min,
+  .irs--square .irs-max {
+    color: #333;
+    font-family: Tekton Pro;
+    font-size: 14px;
+    line-height: 1;
+    top: 0;
+    padding: 3px 5px;
+    background-color: rgba(0, 0, 0, 0.1);
+  }
+  .irs--round .irs-from,
+  .irs--round .irs-to,
+  .irs--round .irs-single {
+     font-family: Tekton Pro;
+     font-size: 14px;
+     line-height: 1;
+     text-shadow: none;
+     padding: 3px 5px;
+     background-color: #205072;
+     color: white;
+     border-radius: 4px;
+  }
+
+  text {
+    font-family: Tekton Pro;
+    color:white;
+  }
+
+  label {
+    font-family: Tekton Pro;
+    margin-left: 14px;
+  }
+
+  select {
+    font-family: Tekton Pro;
+  }
+
+  .show_label {
+    font-family: Tekton Pro;
+  }
+
+  .legend_label {
+    fill: #8FA2AC;
+    text-anchor: middle;
+    font-family: Tekton Pro;}
+
+/* style for toggle */
+ .switch {
+   position: relative;
+   display: inline-block;
+   width: 180px;
+   height: 34px;
+ }
+
+ .switch input {display:none;}
+
+ .slider {
+   position: absolute;
+   cursor: pointer;
+   top: 0;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   background-color: #c2c8c5;
+   -webkit-transition: .4s;
+   transition: .4s;
+ }
+
+ .slider:before {
+   position: absolute;
+   content: "";
+   height: 26px;
+   width: 26px;
+   left: 4px;
+   bottom: 4px;
+   background-color: white;
+   -webkit-transition: .4s;
+   transition: .4s;
+ }
+
+ input:checked + .slider {
+   background-color: #B9D4DB;
+ }
+
+ input:focus + .slider {
+   box-shadow: 0 0 1px #2196F3;
+ }
+
+ input:checked + .slider:before {
+   -webkit-transform: translateX(55px);
+   -ms-transform: translateX(55px);
+   transform: translateX(145px);
+ }
+
+ /*------ ADDED CSS ---------*/
+ .on
+ {
+   display: none;
+ }
+
+ .on, .off
+ {
+   color: white;
+   position: absolute;
+   transform: translate(-50%,-50%);
+   top: 50%;
+   left: 50%;
+   font-size: 14px;
+   font-family: Tekton Pro, sans-serif;
+ }
+
+ input:checked+ .slider .on
+ {display: block;}
+
+ input:checked + .slider .off
+ {display: none;}
+
+ /*--------- END --------*/
+
+ /* Rounded sliders */
+ .slider.round {
+   border-radius: 34px;
+   font-family: Tekton Pro;
+ }
+
+ .slider.round:before {
+   border-radius: 50%;}
+
+ .button001 {
+   border-radius: 20px;
+   border-color: 'transparent';
+   background-color: #B9D4DB;
+   height: 34px;
+   width: 150px;
+   left: 4px;
+   bottom: 4px;
+   top: 8px;
+   color: white;
+   font-size: 12px;
+   padding: 0;
+   border: none;
+   }
+
+
+
+title {
+   background-image: url('/test.png');
+   background-attachment: fixed;
+   background-size: cover;
+ }
+
+ .center {
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+   width: 30%;
+ }
