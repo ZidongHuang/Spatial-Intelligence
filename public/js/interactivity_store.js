@@ -9,7 +9,32 @@ var store_names={}
 var all_data_in_floor={}
 var cnt=0
 var property_id = "beijing_hopson_one"
-const color_platter= ['#630063','#FF0091','#FF7D91','#FFAB91','#bdbdbd'];
+const color_platter= ['#630063','#FF0091','#FF7D91','#FFAB91','#bdbdbd'];   
+const default_data = [{'age17to30': 0,
+    'age31to45': 0,
+    'age46to60': 0,
+    'ageless16': 0,
+    'bodyfat': 0,
+    'bodynormal': 0,
+    'bodythin': 0,
+    'customer': 0,
+    'employee': 0,
+    'end_time': "3000-05-01 00:00:00",
+    'enter_cnt': 0,
+    'enter_rate': 0,
+    'exit_cnt': 0,
+    'female': 0,
+    'hs_baldhead': 0,
+    'hs_blackhair': 0,
+    'hs_glasses': 0,
+    'hs_hat': 0,
+    'hs_longhair': 0,
+    'intersect_enter': 0,
+    'intersect_exit': 0,
+    'passer_cnt': 0,
+    'start_time': "3000-01-01 00:00:00",
+    'store_id': "",
+    'watcher_cnt': 0}];
 
 const id2height={
     '_801': 720000,
@@ -24,11 +49,25 @@ const id2height={
 }
 
 $('#datetime-body').append($('<input>',{
-    placeholder:'选择日期时间: ',
+    placeholder:'Select A date and time: ',
     class:'form-control',
     id: 'input',
 }));
 
+//explode button
+var button1=$('#button-explode2').append($('<button>',{
+    id: 'btn-explode2',
+    class: 'btn',
+    type: 'button',
+    text: 'Explode'
+}));
+
+//show default data on loading
+console.log('test begin')
+createRadarChart(default_data);
+createDonutChart(default_data);
+createCircBarChart(default_data);
+createPiechart(default_data);
 
 
 $.post(apisUrl + '/get_available_date', {'property_id': property_id}, function(data, textStatus, jqXHR){
@@ -67,12 +106,66 @@ floorGroup.on('loaded',function(){
             if (store_id_sel){
                 loadRangeData(startDateTime,endDateTime,store_names[store_id_sel]);
 
-                
             }
         }
     console.log('all stores on floor ', currentFloorStores)
     all_data_in_floor={}   
-    })
+    });
+
+});
+
+storeGroup.on('loaded',function(){
+    button1.on('click',function(){
+        // event: change placeholder text and exlopde the model
+        var text=this.lastChild.innerText
+        // env.visible=false;
+        if (text == 'Explode'){
+            this.lastChild.innerText='Contract'
+            explode();
+        }
+        else{this.lastChild.innerText='Explode';
+            // env.visible=true;
+            contract();      
+        }
+    });
+    function explode(){
+        var height = 0
+        // console.log('exploded!')
+        for (const [key, value] of Object.entries(floorGroup.meshes)) {
+            p = id2height[key];
+        //    console.log(key)
+            value.position=[0,p,0];
+        //    console.log(value.position)
+
+            //store location change
+            for (const [k,v] of Object.entries(storeGroup.meshes)){
+                // console.log('store',k.slice(0,2))
+                // console.log('floor',p)
+                // if stores are on the floor
+                if (k.slice(0,2)==id2floor[key]){
+                    v.position=[0,p+10,0]
+                    v.visible = true;
+                    // console.log(v.position)
+                }
+
+            }
+            
+        };
+        console.log(storeGroup.meshes);
+    };
+    
+    function contract(){
+        // console.log('contracted!')
+        for (const [key, value] of Object.entries(floorGroup.meshes)) {
+           value.position=[0,0,0]
+        //    console.log(value.position)
+        };
+        for (const [key, value] of Object.entries(storeGroup.meshes)) {
+            //    console.log(key)
+            value.position=[0,0,0]
+            //    console.log(value.position)
+            };
+    }
 });
 
 function loadRangeData(startDateTime,endDateTime,store_id){
@@ -142,7 +235,7 @@ function createRadarChart(data){
         }
     },
     title: {
-        text: '店铺： '+ store_id,
+        text: 'Store Name： '+ store_id,
         style: {
             color:'white'
         },
@@ -169,7 +262,7 @@ function createRadarChart(data){
         }
     },
     xaxis: {
-        categories: ['进客率(%)', '出客率(%)', '观望率(%)'],
+        categories: ['Enter Rate(%)', 'Exit Rate(%)', 'Watcher Rate(%)'],
         labels:{
             style:{
                 colors: 'white'
@@ -238,7 +331,7 @@ function createDonutChart(data){
         }
     },
       colors: ['#FF7D91', '#FF0091','#630063'],
-      labels:['进客率(%)', '出客率(%)', '观望率(%)'],
+      labels:['Enter Rate(%)', 'Exit Rate(%)', 'Watcher Rate(%)'],
       legend: {
         position: 'top',
         fontSize:'8px',
@@ -308,12 +401,12 @@ function createCircBarChart(data){
         }
       },
       colors: ['#FF7D91', '#FF0091','#630063'],
-      labels: ['进客人数', '出客人数', '观望人数'],
+      labels: ['Enter Number', 'Exit Number', 'Watcher Number'],
       legend: {
         show: true,
         floating: true,
         fontSize: '8px',
-        position: 'left',
+        position: 'top',
         // width: 100,
         height: 100,
         offsetX: -10,
@@ -428,13 +521,12 @@ function dataWrangle(data){
 
 function createPiechart(data){
     var options={
-        val1: '性别',
-        val2: '年龄',
-        val3: '身材',
-        val4: '发型',
-        val5: '发色',
-        val6: '眼镜',
-        val7: '帽子'
+        val1: 'Gender',
+        val2: 'Age',
+        val4: 'Hair-style',
+        val5: 'Hair-color',
+        val6: 'Glasses',
+        val7: 'Hats'
     }
     $('#dropdown').empty()
     var mySelect = $('#dropdown').append("<select id='mySelect'>");
@@ -445,13 +537,12 @@ function createPiechart(data){
     });
 
     labels=[
-        ['女性','男性'],
-        ['16岁以下','17-30岁','31-45岁','46-60岁','60岁以上'],
-        ['偏胖','正常','偏瘦'],
-        ['光头','长发','其他发型'],
-        ['黑发','其他发色'],
-        ['戴眼镜','不戴眼镜'],
-        ['戴帽子','不戴帽子']
+        ['Female','Male'],
+        ['Baby','Teenager','Youth','Middle-age','Senior'],
+        ['Bold','Long-hair','Other-hair-length'],
+        ['Black-hair','Other-hair-color'],
+        ['Glasses','Without-glasses'],
+        ['Hats','Without-hats']
     ]
 
 
@@ -502,7 +593,7 @@ function DonutChartBasic(data,labels,colors){
         },
       },
       title: {
-        text: '顾客特征比率',
+        text: 'Customer Feature Rate',
         align: 'left',
         margin: 10,
         offsetX: 0,

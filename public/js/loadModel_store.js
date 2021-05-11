@@ -106,7 +106,7 @@ var storeGroup = new xeogl.GLTFModel({
     src: "/static/models/stores.gltf",
     scale: [scale, scale, scale],
     edgeThreshold: 0,
-    opacity: 0.2,
+    opacity: 0.01,
     visible: false,
     handleNode: (function(nodeInfo, actions) {
         var objectCount = 0;
@@ -211,21 +211,27 @@ floorGroup.on("loaded", function(){
 
     cameraControl.on("hoverEnter", function (hit) {     
     // ------ for store
-    if (stores.includes(hit.mesh.id)) {
+    if (stores.includes(hit.mesh.id))  {
         object = scene.components['Anno'+ hit.mesh.id];
-        object.mesh.aabbVisible = true;
-        object.labelShown = true;
-        // do other things for store
+        if (object!==undefined){
+            object.mesh.aabbVisible = true;
+            object.labelShown = true;
+            // do other things for store
+            }
         }
+
     });
 
     cameraControl.on("hoverOut", function (hit) {
     // ------ for store
     if (stores.includes(hit.mesh.id)) {
         object = scene.components['Anno'+ hit.mesh.id];
-        object.mesh.aabbVisible = false;
-        object.labelShown = false;
-        // do other things for store
+        if (object!==undefined){
+            object.mesh.aabbVisible = false;
+            object.labelShown = false;
+            // do other things for store
+            }
+
         }
     });
 
@@ -236,7 +242,7 @@ floorGroup.on("loaded", function(){
                     storeGroup.meshes[lastStore_id].opacity=0.5
                 }
                 else if(lastStore_id){
-                    storeGroup.meshes[lastStore_id].opacity=0.2
+                    storeGroup.meshes[lastStore_id].opacity=0.01
                 }
                 selected_store=hit.mesh.id
                 hit.mesh.opacity=1
@@ -250,7 +256,7 @@ floorGroup.on("loaded", function(){
             storeGroup.meshes[lastStore_id].opacity=0.5
         }
         else if(lastStore_id){
-            storeGroup.meshes[lastStore_id].opacity=0.2
+            storeGroup.meshes[lastStore_id].opacity=0.01
         }
     });
 });

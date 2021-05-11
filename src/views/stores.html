@@ -44,6 +44,18 @@
                 border-radius: 6px;
                 transform: translate(-40px,0);
             }
+            #btn-explode2 {
+                /* position: fixed;
+                bottom:10%;
+                right: 12.5%;
+                width: 80px;
+                height: 40px; */
+                /* border-radius: 5px; */
+                color: rgb(255, 255, 255);
+                background-color: #7e7e7ed8;
+                border-color: aliceblue;
+            }
+
         </style>
 
     </head>
@@ -88,9 +100,21 @@
         </div>
 
         <div class="panel panel-default" id="right-panel-container">
+            <div class='row'>
+                <div class='col-8' align='right'>
+                    <div id="button-rank" style='width:100%;'></div> 
+                </div>
+                <div class='col-4' align='left'>
+                    <div id="button-explode2" style='width:100%;'></div> 
+                </div>
+            </div>
             <br>
-            <br>
-            <div class="container-fluid" id="datetime-body"></div>
+            
+            <div class='row'>
+                <div class='col-12' align='right'>
+                    <div class="container-fluid" id="datetime-body" style='width: 100%;'></div>
+                </div>
+            </div>
         </div>
 
         <script src='/static/js/loadModel_store.js'></script>
