@@ -1,0 +1,91 @@
+{
+ "nodes": [
+  {
+   "name": "Male"
+  },
+  {
+   "name": "Female"
+  },
+  {
+   "name": "Fashion"
+  },
+  {
+   "name": "Accessories"
+  },
+  {
+   "name": "Food"
+  },
+  {
+   "name": "Jewelry"
+  },
+  {
+   "name": "KidsBabies"
+  },
+  {
+   "name": "ConsumerElectronics"
+  }
+ ],
+ "links": [
+  {
+   "source": 0,
+   "target": 2,
+   "value": 3149
+  },
+  {
+   "source": 0,
+   "target": 3,
+   "value": 618
+  },
+  {
+   "source": 0,
+   "target": 4,
+   "value": 286
+  },
+  {
+   "source": 0,
+   "target": 5,
+   "value": 301
+  },
+  {
+   "source": 0,
+   "target": 6,
+   "value": 599
+  },
+  {
+   "source": 0,
+   "target": 7,
+   "value": 612
+  },
+  {
+   "source": 1,
+   "target": 2,
+   "value": 4618
+  },
+  {
+   "source": 1,
+   "target": 3,
+   "value": 459
+  },
+  {
+   "source": 1,
+   "target": 4,
+   "value": 252
+  },
+  {
+   "source": 1,
+   "target": 5,
+   "value": 238
+  },
+  {
+   "source": 1,
+   "target": 6,
+   "value": 685
+  },
+  {
+   "source": 1,
+   "target": 7,
+   "value": 445
+  }
+ ],
+ "date": "2021-2-11"
+}
