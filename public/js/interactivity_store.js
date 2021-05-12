@@ -21,8 +21,8 @@ const default_data = [{'age17to30': 0,
     'employee': 0,
     'end_time': "3000-05-01 00:00:00",
     'enter_cnt': 0,
-    'enter_rate': 0,
-    'exit_cnt': 0,
+    'enter_rate': 1,
+    'exit_cnt': 1,
     'female': 0,
     'hs_baldhead': 0,
     'hs_blackhair': 0,
@@ -65,7 +65,7 @@ var button1=$('#button-explode2').append($('<button>',{
 //show default data on loading
 console.log('test begin')
 createRadarChart(default_data);
-createDonutChart(default_data);
+// createDonutChart(default_data);
 createCircBarChart(default_data);
 createPiechart(default_data);
 
@@ -179,7 +179,7 @@ function loadRangeData(startDateTime,endDateTime,store_id){
             // console.log('data requested!');
 
             createRadarChart(data);
-            createDonutChart(data);
+            // createDonutChart(data);
             createCircBarChart(data);
             createPiechart(data);
         }
@@ -212,7 +212,7 @@ function createRadarChart(data){
 
     var options = {
         series: [{
-        name: '百分比',
+        name: 'Percent',
         data: [(enter_tot/total*100).toFixed(1), (exit_tot/total*100).toFixed(1), (watcher_tot/total*100).toFixed(1)],
     }],
         chart: {
@@ -293,62 +293,62 @@ function createRadarChart(data){
 };
 
 // donut Chart gender
-function createDonutChart(data){
-    $('#donut-chart').empty();
+// function createDonutChart(data){
+//     $('#donut-chart').empty();
 
-    var enter_cnt=new Array();
-    var exit_cnt=new Array();
-    var watcher_cnt=new Array();
-    // var passer_cnt=new Array();
+//     var enter_cnt=new Array();
+//     var exit_cnt=new Array();
+//     var watcher_cnt=new Array();
+//     // var passer_cnt=new Array();
 
-    data.forEach(d=> {
-        enter_cnt.push(parseInt(d.enter_cnt))
-        exit_cnt.push(parseInt(d.exit_cnt))
-        watcher_cnt.push(parseInt(d.watcher_cnt))
-        // passer_cnt.push(parseInt(d.passer_cnt))
-    });
+//     data.forEach(d=> {
+//         enter_cnt.push(parseInt(d.enter_cnt))
+//         exit_cnt.push(parseInt(d.exit_cnt))
+//         watcher_cnt.push(parseInt(d.watcher_cnt))
+//         // passer_cnt.push(parseInt(d.passer_cnt))
+//     });
 
-    var enter_tot=enter_cnt.reduce(function(a,b){return a+b},0);
-    var exit_tot=exit_cnt.reduce(function(a,b){return a+b},0);
-    // var passer_tot=passer_cnt.reduce(function(a,b){return a+b},0);
-    var watcher_tot=watcher_cnt.reduce(function(a,b){return a+b},0);
-    var total=enter_tot+exit_tot+watcher_tot
+//     var enter_tot=enter_cnt.reduce(function(a,b){return a+b},0);
+//     var exit_tot=exit_cnt.reduce(function(a,b){return a+b},0);
+//     // var passer_tot=passer_cnt.reduce(function(a,b){return a+b},0);
+//     var watcher_tot=watcher_cnt.reduce(function(a,b){return a+b},0);
+//     var total=enter_tot+exit_tot+watcher_tot
 
-    var options = {
-        series: [enter_tot,exit_tot,watcher_tot],
-        chart: {
-        type: 'donut',
-        height: '100%'
-      },
-      dataLabels: {
-        enabled: false
-      },
-      tooltip: {
-        y: {
-        formatter: function(val) {
-            return (val*100/total).toFixed(1)
-        }
-        }
-    },
-      colors: ['#FF7D91', '#FF0091','#630063'],
-      labels:['Enter Rate(%)', 'Exit Rate(%)', 'Watcher Rate(%)'],
-      legend: {
-        position: 'top',
-        fontSize:'8px',
-        markers: {
-            width:8,
-            height: 8,
-        },
-        labels: {
-            colors: 'white',
-            useSeriesColors: false
-        },
-      }
-      };
+//     var options = {
+//         series: [enter_tot,exit_tot,watcher_tot],
+//         chart: {
+//         type: 'donut',
+//         height: '100%'
+//       },
+//       dataLabels: {
+//         enabled: false
+//       },
+//       tooltip: {
+//         y: {
+//         formatter: function(val) {
+//             return (val*100/total).toFixed(1)
+//         }
+//         }
+//     },
+//       colors: ['#FF7D91', '#FF0091','#630063'],
+//       labels:['Enter Rate(%)', 'Exit Rate(%)', 'Watcher Rate(%)'],
+//       legend: {
+//         position: 'top',
+//         fontSize:'8px',
+//         markers: {
+//             width:8,
+//             height: 8,
+//         },
+//         labels: {
+//             colors: 'white',
+//             useSeriesColors: false
+//         },
+//       }
+//       };
 
-      var chart = new ApexCharts(document.querySelector("#donut-chart"), options);
-      chart.render();
-}
+//       var chart = new ApexCharts(document.querySelector("#donut-chart"), options);
+//       chart.render();
+// }
 
 // circlular bar Chart body figure
 function createCircBarChart(data){
@@ -383,7 +383,7 @@ function createCircBarChart(data){
         radialBar: {
           offsetY: 0,
           startAngle: 0,
-          endAngle: 270,
+          endAngle: 360,
           hollow: {
             margin: 5,
             size: '30%',
@@ -405,8 +405,8 @@ function createCircBarChart(data){
       legend: {
         show: true,
         floating: true,
-        fontSize: '8px',
-        position: 'top',
+        fontSize: '10px',
+        position: 'left',
         // width: 100,
         height: 100,
         offsetX: -10,
@@ -595,12 +595,12 @@ function DonutChartBasic(data,labels,colors){
       title: {
         text: 'Customer Feature Rate',
         align: 'left',
-        margin: 10,
+        margin: 12,
         offsetX: 0,
         offsetY: 0,
         floating: true,
         style: {
-          fontSize:  '14px',
+          fontSize:  '10px',
           fontWeight:  'bold',
           fontFamily:  undefined,
           color:  'white'
