@@ -61,8 +61,6 @@
           align: middle;
           position: absolute;
         }
-
-
     /* original */
       .bd-placeholder-img {
         font-size: 1.125rem;
@@ -101,6 +99,8 @@
             <a class="nav-link" href="/stores">Model</a>
         </nav>
         </div>
+        <button type="button" id = "2" class = '2' onclick = "stop(t);"
+                style='position:absolute;  text-align: center'>stop</button>
     </header>
 
     <main class="px-3">
@@ -113,13 +113,27 @@
         <svg class = "svg1"></svg>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js" charset="utf-8" type="text/javascript"></script>
         <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
+        <script src="https://d3js.org/d3-timer.v2.min.js"></script>
         <script src="/static/js/d3.sankey2.js" charset="utf-8" type="text/javascript"></script>
         <script src="/static/js/flow.js" type="text/javascript"></script>
 
         <p class="lead">
-        <a href="/data" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Explore Data</a>
-        <a href="/stores" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Explore in 3D</a>
+          <a href="/data" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Explore Data</a>
+          <a href="/stores" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Explore in 3D</a>
         </p>
+        <!-- <button type="button" id = "Gender Data" class = 'button1' onclick = "update(t);"
+                style='position:absolute; left: 50%; top:90%; transform: translateX(-50%); text-align: center'>Update</button> -->
+
+        <select id="category" class = 'select' onchange="update(t)" style=' left: 55%; top:90%; transform: translateX(-50%)'>
+          <option value="gender">By Gender</option>
+          <option value="age">By Age</option>
+        </select>
+
+        <input type="date" id="date" class = 'select'
+               value="2021-02-01" min="2021-02-01" max="2021-02-28"
+               onchange = 'update(t)'>
+
     </main>
 
     <footer class="mt-auto text-white-50">
