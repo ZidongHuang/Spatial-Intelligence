@@ -1,9 +1,13 @@
-var outerWidth = 1200;
+var outerWidth = 1250;
 var outerHeight = 550;
 
 var div = d3.select("body").append("div")
     .attr("class", "tooltip")
-    .style("display", "none");
+    .style("opacity", 0);
+
+var div2 = d3.select("body").append("div")
+    .attr("class", "tooltip2")
+    .style("opacity", 0);
 
 var margin = {top: 1, right: 1, bottom: 1, left: 1},
     width = outerWidth - margin.left - margin.right,
@@ -19,14 +23,18 @@ var svg = d3.select(".svg1")
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-var svg2 = d3.select(".svg2")
-             .attr("width", 1300)
-             .attr("height", outerHeight);
+// var svg2 = d3.select(".svg2")
+//              .attr("width", 1300)
+//              .attr("height", outerHeight);
+
+d3.select("canvas")
+  .attr("width", outerWidth)
+  .attr("height", outerHeight)
 
 var sankey = d3.sankey()
-               .nodeWidth(15)
+               .nodeWidth(17)
                .nodePadding(15)
-               .size([1200, 550])
+               .size([outerWidth, outerHeight])
                //.align('left');
 
 var freqCounter = 1;
@@ -45,8 +53,8 @@ sankey.nodes(flow.nodes)
       .links(flow.links)
       .layout(32);
 
-// console.log("links", flow.links);
-// console.log("nodes", flow.nodes);
+console.log("links", flow.links);
+console.log("nodes", flow.nodes);
 
 var path = sankey.link();
 
@@ -67,14 +75,16 @@ var link = svg.append("g").selectAll(".link")
         else{link.particleSize = 0.5;}
        })
 
-      div.style("display", "inline");
+      div.transition().duration(200)
+      .style("display", "inline")
+      .style("opacity", 1);
 
     })
     .on("mousemove", function(d){
       div
-            .text("Now there are " + d.value + " " + d.source.name + " entering the " + d.target.name)
-            .style("left", (d3.event.pageX -80) + "px")
-            .style("top", (d3.event.pageY - 100) + "px");
+         .html("<p>" + d.source.name + " -> " + d.target.name + "<br/>" + "<b>" + d.value + " people<b/><p>")
+         .style("left", (d3.event.pageX - 130) + "px")
+         .style("top", (d3.event.pageY - 75) + "px");
     })
     .on("mouseout", d => {
       d3.selectAll(".link").filter("." + d.source.name).filter("." + d.target.name)
@@ -84,7 +94,9 @@ var link = svg.append("g").selectAll(".link")
         link.particleSize = 1.5;
        })
 
-      div.style("display", "none");
+      div.transition().duration(200)
+        .style("display", "none")
+        .style("opacity", 0);
 
     })
     .sort(function(a, b) { return b.dy - a.dy; });
@@ -92,8 +104,8 @@ var link = svg.append("g").selectAll(".link")
 var node = svg.append("g").selectAll(".node")
     .data(flow.nodes)
   .enter().append("g")
-    .attr("class", "node")
-    .attr("transform", function(d) { return "translate(" + d.x + "," + d.y +  ")"; })
+    .attr("class", d => "node " + d.name)
+    .attr("transform", d => "translate(" + d.x + "," + d.y +  ")")
     .on("mouseover", d => {
       d3.selectAll("."+d.name)
         .style("stroke-opacity", 0.1);
@@ -104,6 +116,39 @@ var node = svg.append("g").selectAll(".node")
         else{link.particleSize = 0.5;}
        })
 
+       div2.transition().duration(200)
+       .style("display", "inline")
+       .style("opacity", 1);
+    })
+    .on("mousemove", function(d){
+      var text = "";
+      if(d.sourceLinks.length){
+        d.sourceLinks.forEach(function(link){
+            var perc = d3.format(".0%")(link.value / d.value)
+            var name = link.target.name
+            text += perc + " " + name + "<br/>"
+            })
+        div2
+           .html("<p>"+ text + "<p>")
+           .style("text-align", "right")
+           .style("width", "200px")
+           .style("height", "150px")
+           .style("left", (d3.event.pageX - 230) + "px")
+           .style("top", (d3.event.pageY - 75) + "px");
+      } else {
+        d.targetLinks.forEach(function(link){
+            var perc = d3.format(".0%")(link.value / d.value)
+            var name = link.source.name
+            text += perc + " " + name + "<br/>"
+            })
+        div2
+           .html("<p>"+ text + "<p>")
+           .style("text-align", "left")
+           .style("width", "150px")
+           .style("height", "60px")
+           .style("left", (d3.event.pageX + 30) + "px")
+           .style("top", (d3.event.pageY - 25) + "px");
+      }
     })
     .on("mouseout",d => {
       d3.selectAll("."+d.name)
@@ -112,11 +157,16 @@ var node = svg.append("g").selectAll(".node")
       flow.links.forEach(function (link) {
         link.particleSize = 1.5;
       })
+
+      div2.transition().duration(200)
+        .style("opacity", 0)
+        .style("display", "none");
     })
   .call(d3.behavior.drag()
     .origin(function(d) { return d; })
     .on("dragstart", function() { this.parentNode.appendChild(this); })
-    .on("drag", dragmove))
+    .on("drag", dragmove)
+    )
 
 node.append("rect")
     .attr("class", d => d.name)
@@ -124,8 +174,6 @@ node.append("rect")
     .attr("width", sankey.nodeWidth())
     .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
     .style("stroke", "none")
-  .append("title")
-    .text(function(d) { return d.name + "\n" + format(d.value); });
 
 node.append("text")
     .attr("x", -6)
@@ -218,7 +266,7 @@ function particleEdgeCanvasPath(elapsed) {
   //get canvas 2d context for drawing
   var context = d3.select("canvas").node().getContext("2d");
   //clear previous particles
-  context.clearRect(0,0,1200,1000);
+  context.clearRect(0,0,outerWidth,outerHeight);
   //draw particles
   for (var x in particles) {
       //the duration this particle exists
@@ -235,21 +283,10 @@ function particleEdgeCanvasPath(elapsed) {
   }
 }
 
+
+
 //keep generating particles
 var t = d3.timer(tick, 0);
-
-var stop_flag = true;
-
-var stop = function(timer){
-  if(stop_flag){
-    timer.stop();
-    stop_flag = !stop_flag;
-  }else{
-    timer.restart(tick, 0);
-    stop_flag = !stop_flag;
-  }
-}
-
 
 var update = function(timer){
   var category = document.getElementById("category").value;
@@ -273,11 +310,11 @@ var update = function(timer){
   path = sankey.link();
 
   timer.stop();
-  d3.select("canvas").node().getContext("2d").clearRect(0,0,1200,1000);
+  d3.select("canvas").node().getContext("2d").clearRect(0,0,outerWidth,outerHeight);
   d3.selectAll('.link').remove();
   d3.selectAll(".node").remove();
 
-  link = svg.append("g").selectAll(".link")
+  var link = svg.append("g").selectAll(".link")
       .data(flow.links)
     .enter().append("path")
       .attr("class", d => {return "link " + d.source.name + " " + d.target.name})
@@ -294,14 +331,16 @@ var update = function(timer){
           else{link.particleSize = 0.5;}
          })
 
-        div.style("display", "inline");
+        div.transition().duration(200)
+        .style("display", "inline")
+        .style("opacity", 1);
 
       })
       .on("mousemove", function(d){
         div
-              .text("Now there are " + d.value + " " + d.source.name + " entering the " + d.target.name)
-              .style("left", (d3.event.pageX -80) + "px")
-              .style("top", (d3.event.pageY - 100) + "px");
+           .html("<p>" + d.source.name + " -> " + d.target.name + "<br/>" + "<b>" + d.value + " people<b/><p>")
+           .style("left", (d3.event.pageX - 130) + "px")
+           .style("top", (d3.event.pageY - 75) + "px");
       })
       .on("mouseout", d => {
         d3.selectAll(".link").filter("." + d.source.name).filter("." + d.target.name)
@@ -311,15 +350,18 @@ var update = function(timer){
           link.particleSize = 1.5;
          })
 
-        div.style("display", "none");
+        div.transition().duration(200)
+          .style("display", "none")
+          .style("opacity", 0);
+
       })
       .sort(function(a, b) { return b.dy - a.dy; });
 
   var node = svg.append("g").selectAll(".node")
       .data(flow.nodes)
     .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y +  ")"; })
+      .attr("class", d => "node " + d.name)
+      .attr("transform", d => "translate(" + d.x + "," + d.y +  ")")
       .on("mouseover", d => {
         d3.selectAll("."+d.name)
           .style("stroke-opacity", 0.1);
@@ -330,6 +372,39 @@ var update = function(timer){
           else{link.particleSize = 0.5;}
          })
 
+         div2.transition().duration(200)
+         .style("display", "inline")
+         .style("opacity", 1);
+      })
+      .on("mousemove", function(d){
+        var text = "";
+        if(d.sourceLinks.length){
+          d.sourceLinks.forEach(function(link){
+              var perc = d3.format(".0%")(link.value / d.value)
+              var name = link.target.name
+              text += perc + " " + name + "<br/>"
+              })
+          div2
+             .html("<p>"+ text + "<p>")
+             .style("text-align", "right")
+             .style("width", "200px")
+             .style("height", "150px")
+             .style("left", (d3.event.pageX - 230) + "px")
+             .style("top", (d3.event.pageY - 75) + "px");
+        } else {
+          d.targetLinks.forEach(function(link){
+              var perc = d3.format(".0%")(link.value / d.value)
+              var name = link.source.name
+              text += perc + " " + name + "<br/>"
+              })
+          div2
+             .html("<p>"+ text + "<p>")
+             .style("text-align", "left")
+             .style("width", "150px")
+             .style("height", "60px")
+             .style("left", (d3.event.pageX + 30) + "px")
+             .style("top", (d3.event.pageY - 25) + "px");
+        }
       })
       .on("mouseout",d => {
         d3.selectAll("."+d.name)
@@ -338,11 +413,22 @@ var update = function(timer){
         flow.links.forEach(function (link) {
           link.particleSize = 1.5;
         })
+
+        div2.transition().duration(200)
+          .style("display", "none")
+          .style("opacity", 0);
       })
     .call(d3.behavior.drag()
       .origin(function(d) { return d; })
       .on("dragstart", function() { this.parentNode.appendChild(this); })
-      .on("drag", dragmove))
+      .on("drag", dragmove)
+      )
+
+  function dragmove(d) {
+    d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+    sankey.relayout();
+    link.attr("d", path);
+  }
 
   node.append("rect")
       .attr("class", d => d.name)
@@ -350,8 +436,6 @@ var update = function(timer){
       .attr("width", sankey.nodeWidth())
       .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
       .style("stroke", "none")
-    .append("title")
-      .text(function(d) { return d.name + "\n" + format(d.value); });
 
   node.append("text")
       .attr("x", -6)
@@ -409,7 +493,7 @@ var update = function(timer){
     //get canvas 2d context for drawing
     var context = d3.select("canvas").node().getContext("2d");
     //clear previous particles
-    context.clearRect(0,0,1200,1000);
+    context.clearRect(0,0,outerWidth,outerHeight);
     //draw particles
     for (var x in particles) {
         //the duration this particle exists

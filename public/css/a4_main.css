@@ -3,10 +3,15 @@
   /* Import the Baloo Thambi font from Google Fonts  */
   @import url('https://fonts.googleapis.com/css?family=Baloo+Thambi');
 
+  body {
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)); 
+  }
   .form-group {
     display: inline-block;
     margin-right: 10px;
   }
+  
+  .vis{ max-width: 90em;}
 
   .form-control {
     display: inline-block;

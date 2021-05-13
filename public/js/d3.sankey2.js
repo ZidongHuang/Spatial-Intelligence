@@ -201,9 +201,9 @@ var sankey = function() {
     resolveCollisions();
 
     for (var alpha = 1; iterations > 0; --iterations) {
-      relaxRightToLeft(alpha*.99);
+      relaxRightToLeft(alpha*0.99);
       resolveCollisions();
-      relaxLeftToRight(alpha*.99);
+      relaxLeftToRight(alpha*0.99);
       resolveCollisions();
     }
 
@@ -244,7 +244,7 @@ var sankey = function() {
         nodes.forEach(function(node) {
           if (node.sourceLinks.length) {
             var y = d3Array.sum(node.sourceLinks, weightedTarget) / d3Array.sum(node.sourceLinks, value);
-            //node.y += (y - center(node)) * alpha;
+            // node.y += (y - center(node)) * alpha;
           }
         });
       });
