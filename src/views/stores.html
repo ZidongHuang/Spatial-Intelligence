@@ -131,27 +131,36 @@
                     .setOptions("overlayOpacity", 90)
                     .setOptions({
                             steps: [{
-                                title: 'Instruction',
-                                intro: "Welcome to the digital Hopson One Mall!"
+                                title: 'Instruction: Step 1',
+                                intro: "<img src='/static/img/step1.jpg' />\
+                                Welcome to the digital Hopson One Mall! <br> \
+                                Rotate with your left click and Move with the right click. <br>\
+                                Zoom in or Zoom out with the mouse wheel. <br>\
+                                Also, try the keyboard (Q,E,A,D..1,2,3..) to play with it! "
                             }, 
                             {
-                                title:'Date',
+                                title:'Instruction: Step 2',
+                                intro: " <img src='/static/img/step2.jpg' />\
+                                Click the floor and select the store you like! <br>\
+                                Currently ONLY THE PURPLE STORE have the data."
+                            },
+                            {
+                                title:'Instruction: Step 3',
                                 element: document.querySelector('#datetime-body'),
-                                intro: "Step 1: Click two dates for time range"
+                                intro: "Click two dates for the time range!"
                             },
+
                             {
-                                title:'Model',
-                                intro: "Step 2: Click the floor and store that you are intereted in"
-                            },
-                            {
-                                title:'Information',
+                                title:'Instruction: Step 4',
                                 element: document.querySelector('#panel-body'),
-                                intro: "Step 3: Now we can view the detailed information!"
+                                intro: "Now we can view the detailed information! <br>\
+                                Have fun!"
                             }
                             ]
                         })
                     .start();
                 }
+                intro();
             </script>  
         </div>  
         

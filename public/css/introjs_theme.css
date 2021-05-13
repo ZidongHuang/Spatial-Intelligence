@@ -1,8 +1,15 @@
 .introjs-tooltip {
     background-color: rgba(000, 0, 0, 0.5);
     color: #fff;
+    max-width: max-content;
   }
-  
+
+  .introjs-floating{
+    left: 50%;
+    top: 50%;
+    transform: translate(-20%, -20%);
+  }
+
   .introjs-button,
   .introjs-button:hover, .introjs-button:focus, .introjs-button:active,
   .introjs-disabled, .introjs-disabled:focus, .introjs-disabled:hover {
