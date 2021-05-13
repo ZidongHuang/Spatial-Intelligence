@@ -1,0 +1,157 @@
+{
+ "nodes": [
+  {
+   "name": "Teenager"
+  },
+  {
+   "name": "Youth"
+  },
+  {
+   "name": "MiddleAged"
+  },
+  {
+   "name": "Senior"
+  },
+  {
+   "name": "Fashion"
+  },
+  {
+   "name": "Accessories"
+  },
+  {
+   "name": "Food"
+  },
+  {
+   "name": "Jewelry"
+  },
+  {
+   "name": "KidsBabies"
+  },
+  {
+   "name": "ConsumerElectronics"
+  }
+ ],
+ "links": [
+  {
+   "source": 0,
+   "target": 4,
+   "value": 344
+  },
+  {
+   "source": 0,
+   "target": 5,
+   "value": 19
+  },
+  {
+   "source": 0,
+   "target": 6,
+   "value": 70
+  },
+  {
+   "source": 0,
+   "target": 7,
+   "value": 17
+  },
+  {
+   "source": 0,
+   "target": 8,
+   "value": 131
+  },
+  {
+   "source": 0,
+   "target": 9,
+   "value": 75
+  },
+  {
+   "source": 1,
+   "target": 4,
+   "value": 3613
+  },
+  {
+   "source": 1,
+   "target": 5,
+   "value": 461
+  },
+  {
+   "source": 1,
+   "target": 6,
+   "value": 233
+  },
+  {
+   "source": 1,
+   "target": 7,
+   "value": 181
+  },
+  {
+   "source": 1,
+   "target": 8,
+   "value": 513
+  },
+  {
+   "source": 1,
+   "target": 9,
+   "value": 369
+  },
+  {
+   "source": 2,
+   "target": 4,
+   "value": 3120
+  },
+  {
+   "source": 2,
+   "target": 5,
+   "value": 430
+  },
+  {
+   "source": 2,
+   "target": 6,
+   "value": 360
+  },
+  {
+   "source": 2,
+   "target": 7,
+   "value": 245
+  },
+  {
+   "source": 2,
+   "target": 8,
+   "value": 544
+  },
+  {
+   "source": 2,
+   "target": 9,
+   "value": 487
+  },
+  {
+   "source": 3,
+   "target": 4,
+   "value": 302
+  },
+  {
+   "source": 3,
+   "target": 5,
+   "value": 45
+  },
+  {
+   "source": 3,
+   "target": 6,
+   "value": 78
+  },
+  {
+   "source": 3,
+   "target": 7,
+   "value": 19
+  },
+  {
+   "source": 3,
+   "target": 8,
+   "value": 64
+  },
+  {
+   "source": 3,
+   "target": 9,
+   "value": 32
+  }
+ ],
+ "date": "2021-2-2"
+}
