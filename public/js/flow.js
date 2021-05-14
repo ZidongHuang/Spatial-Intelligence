@@ -30,7 +30,6 @@ var update = function(){
   var svg = d3.select(".svg1")
               .attr("width", outerWidth)
               .attr("height", outerHeight)
-              .append("g")
               // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
   d3.select("canvas")
@@ -71,13 +70,15 @@ var update = function(){
   path = sankey.link();
 
   d3.select("canvas").node().getContext("2d").clearRect(0,0,outerWidth,outerHeight);
-  d3.selectAll('.link').remove();
-  d3.selectAll(".node").remove();
+  d3.selectAll('.alllink').remove();
+  d3.selectAll(".allnode").remove();
 
-  var link = svg.append("g").selectAll(".link")
+  var link = svg.append("g")
+      .attr("class", "alllink")
+      .selectAll(".link")
       .data(flow.links)
     .enter().append("path")
-      .attr("class", d => {return "link " + d.source.name + " " + d.target.name})
+      .attr("class", d => {return "link l" + d.source.name + " " + d.target.name})
       .attr("d", path)
       .style("stroke-width", function(d) { return Math.max(1, d.dy ); })
       .style("stroke-opacity", 0.05)
@@ -117,10 +118,12 @@ var update = function(){
       })
       .sort(function(a, b) { return b.dy - a.dy; });
 
-  var node = svg.append("g").selectAll(".node")
+  var node = svg.append("g")
+      .attr("class", "allnode")
+      .selectAll(".node")
       .data(flow.nodes)
     .enter().append("g")
-      .attr("class", d => "node " + d.name)
+      .attr("class", d => "node n" + d.name)
       .attr("transform", d => "translate(" + d.x + "," + d.y +  ")")
       .on("mouseover", d => {
         d3.selectAll("."+d.name)
@@ -178,10 +181,11 @@ var update = function(){
           .style("display", "none")
           .style("opacity", 0);
       })
-    .call(d3.behavior.drag()
-      .origin(function(d) { return d; })
-      .on("dragstart", function() { this.parentNode.appendChild(this); })
-      .on("drag", dragmove)
+    .call(
+      d3.behavior.drag()
+        .origin(function(d) { return d; })
+        .on("dragstart", function() { this.parentNode.appendChild(this); })
+        .on("drag", dragmove)
       )
 
   function dragmove(d) {
@@ -191,7 +195,7 @@ var update = function(){
   }
 
   node.append("rect")
-      .attr("class", d => d.name)
+      .attr("class", d => "rect r" + d.name)
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
       // .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
@@ -213,6 +217,23 @@ var update = function(){
     .filter(function(d) { return d.x < width / 2; })
       .attr("x", 6 + sankey.nodeWidth())
       .attr("text-anchor", "start");
+
+  if(category == "gender"){
+    d3.selectAll(".nFemale")
+      .attr("transform", "translate(" + flow.nodes[1].x + "," + (flow.nodes[1].y = outerHeight - flow.nodes[1].dy) + ")");
+    sankey.relayout();
+    link.attr("d", path);
+    d3.select("canvas").node().getContext("2d").clearRect(0,0,outerWidth,outerHeight);
+  }else if (category == 'age'){
+    d3.selectAll(".nSenior")
+      .attr("transform", "translate(" + flow.nodes[3].x + "," + (flow.nodes[3].y = outerHeight - flow.nodes[3].dy) + ")");
+    d3.selectAll(".nMiddleAged")
+      .attr("transform", "translate(" + flow.nodes[2].x + "," + (flow.nodes[2].y = outerHeight - flow.nodes[3].dy - flow.nodes[2].dy - sankey.nodePadding()) + ")");
+
+    sankey.relayout();
+    link.attr("d", path);
+    d3.select("canvas").node().getContext("2d").clearRect(0,0,outerWidth,outerHeight);
+  }
 
   //create Particles <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   var linkExtent = d3.extent(flow.links, function (d) {return d.value});
