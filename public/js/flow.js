@@ -1,55 +1,57 @@
+//initialize parameters<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 var outerWidth = 0.7 * window.innerWidth;
 var outerHeight = 0.6 * window.innerHeight;
 
+var size_normal = 4;
+var size_hover = 6.5;
+var size_hover_rest = 1;
+
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+var div2 = d3.select("body").append("div")
+    .attr("class", "tooltip2")
+    .style("opacity", 0);
+
+var gender_colorScale = d3.scale.ordinal()
+                                .domain(['Male', 'Female', 'Fashion', 'Food', 'ConsumerElectronics', 'Accessories', 'KidsBabies', 'Jewelry'])
+                                .range(['#76B3BD', '#DFA899' , '#3D94B8', '#3D6F94', '#D1807C', '#84AAB3', '#C6A899', '#8B0D3B']);
+
+var age_colorScale = d3.scale.ordinal()
+                                .domain(['Teenager', 'Youth', 'MiddleAged', 'Senior', 'Fashion', 'Food', 'ConsumerElectronics', 'Accessories', 'KidsBabies', 'Jewelry'])
+                                .range(['#76B3BD', '#DFA899' , '#3D94B8', '#3D6F94', '#D1807C', '#84AAB3', '#C6A899', '#8B0D3B', '#8B0D3B', '#8B0D3B']);
+
+var svg = d3.select(".svg1")
+            .attr("width", outerWidth)
+            .attr("height", outerHeight)
+            // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.select("canvas")
+  .attr("width", outerWidth)
+  .attr("height", outerHeight)
+
+var width = outerWidth,
+    height = outerHeight;
+
+var formatNumber = d3.format(",.0f"),
+    format = function(d) { return formatNumber(d) + " TWh"; },
+    color = d3.scale.category10();
+
+var sankey = d3.sankey()
+               .nodeWidth(17)
+               .nodePadding(15)
+               .size([outerWidth, outerHeight])
+var t;
+
+
 var update = function(){
-  //initialize parameters<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-  var div = d3.select("body").append("div")
-      .attr("class", "tooltip")
-      .style("opacity", 0);
-
-  var div2 = d3.select("body").append("div")
-      .attr("class", "tooltip2")
-      .style("opacity", 0);
-
-  var margin = {top: 1, right: 1, bottom: 1, left: 1},
-      width = outerWidth,
-      height = outerHeight;
-
-  var formatNumber = d3.format(",.0f"),
-      format = function(d) { return formatNumber(d) + " TWh"; },
-      color = d3.scale.category10();
-
-  var gender_colorScale = d3.scale.ordinal()
-                                  .domain(['Male', 'Female', 'Fashion', 'Food', 'ConsumerElectronics', 'Accessories', 'KidsBabies', 'Jewelry'])
-                                  .range(['#76B3BD', '#DFA899' , '#3D94B8', '#3D6F94', '#D1807C', '#84AAB3', '#C6A899', '#8B0D3B']);
-
-  var age_colorScale = d3.scale.ordinal()
-                                  .domain(['Teenager', 'Youth', 'MiddleAged', 'Senior', 'Fashion', 'Food', 'ConsumerElectronics', 'Accessories', 'KidsBabies', 'Jewelry'])
-                                  .range(['#76B3BD', '#DFA899' , '#3D94B8', '#3D6F94', '#D1807C', '#84AAB3', '#C6A899', '#8B0D3B', '#8B0D3B', '#8B0D3B']);
-
-  var svg = d3.select(".svg1")
-              .attr("width", outerWidth)
-              .attr("height", outerHeight)
-              // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-  d3.select("canvas")
-    .attr("width", outerWidth)
-    .attr("height", outerHeight)
-
-  var sankey = d3.sankey()
-                 .nodeWidth(17)
-                 .nodePadding(15)
-                 .size([outerWidth, outerHeight])
-                 //.align('left');
-
-  var freqCounter = 1;
 
   //create Sankey <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
   var category = document.getElementById("category").value;
   var date = document.getElementById("date").value;
-  console.log(date);
-  console.log(category)
   var url = '/static/js/data/' + category + "_" + date + '.json'
+  var flow, path;
 
   $.ajax({
     url: url,
@@ -63,9 +65,6 @@ var update = function(){
   sankey.nodes(flow.nodes)
         .links(flow.links)
         .layout(32);
-
-  console.log(flow.nodes);
-  console.log(flow.links);
 
   path = sankey.link();
 
@@ -241,10 +240,6 @@ var update = function(){
   var particleSizeScale = d3.scale.linear().domain(linkExtent).range([1,5]);
   var particleSpeedScale = d3.scale.linear().domain(linkExtent).range([1, 5]);
   var particles = [];
-  var p_counts = 0;
-  var size_normal = 4;
-  var size_hover = 6.5;
-  var size_hover_rest = 1;
 
   flow.links.forEach(function (link) {
     link.freq = frequencyScale(link.value);
@@ -300,7 +295,10 @@ var update = function(){
     }
   }
 
-  var t = d3.timer(tick, 0);
+  if(t !== undefined ){
+    t.stop();
+  }
+  t = d3.timer(tick, 0);
 }
 
 update();
