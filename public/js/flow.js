@@ -1,5 +1,5 @@
-var outerWidth = 1250;
-var outerHeight = 550;
+var outerWidth = 0.7 * window.innerWidth;
+var outerHeight = 0.6 * window.innerHeight;
 
 var div = d3.select("body").append("div")
     .attr("class", "tooltip")
@@ -15,7 +15,7 @@ var margin = {top: 1, right: 1, bottom: 1, left: 1},
 
 var formatNumber = d3.format(",.0f"),
     format = function(d) { return formatNumber(d) + " TWh"; },
-    color = d3.scale.category10();
+    color = d3.scale.category20();
 
 var svg = d3.select(".svg1")
             .attr("width", width + margin.left + margin.right)

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<html lang="en" class="h-100 w-100"></html>
 <!--
 //flag = 7/4 Wed afternoon
 //newest version with: dynamic scaling, single tooltip, complete dropdown, chained tooltip, click to stay
 //pending: vertical zoom
 -->
 
-<html>
+
 
 <head>
 <meta charset="utf-8">
@@ -33,8 +34,8 @@
 </head>
 
 
-    <body class="d-flex h-100 text-center text-white bg-dark" style= 'max-width:1500px ;margin:0 auto'>
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <body class="d-flex w-100 h-100 text-center text-white bg-dark" >
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column mw-100">
             <!------------------------ header ------------------------->
             <header class="mb-auto">
                 <div>
@@ -49,7 +50,8 @@
         
             <!------------------------ main content ------------------------->
             <!-- A div contaimer for the customer type selector dropdown menu -->
-            <div id='toolbar' text-align = 'left'></div>
+            <main class="px-3">
+            <div id='toolbar'></div>
 
             <div id= 'legend'>
                 <svg id ='legend_type_color' width = '1000' height = '30'>
@@ -86,13 +88,51 @@
 
                 </svg>
             </div>
-
-            <div id = 'button' style='width:1500px;'>
-                <button type="button" id = "clear_button" class = 'button001' onclick = "clearView();" style='position:absolute; left: 800px; top: 920px; text-align: center'>Clear All Selection</button>
+            <div id = 'legend_bubble' width = '1500' height = '100'>
+                <svg id ='legend_bubble_size' width = '1500' height = '50'>
+                    <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
+                    font-family = 'Tekton Pro' font-size = '14'
+                    transform = 'translate (70,0)' >
+                    <g transform = 'translate (-70,0)'>
+                    <text dominant-baseline = 'central' x= '25' y= '20'>Customer Volume count:</text>
+                    </g>
+                    <g transform = 'translate (150,0)'>
+                    <circle cx = '0' cy ='20' r = '3' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                    <text dominant-baseline = 'central' x= '40' y= '20'>below 100</text>
+                    </g>
+                    <g transform = 'translate (300,0)'>
+                    <circle cx = '0' cy ='20' r = '6' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                    <text dominant-baseline = 'central' x= '25' y= '20'>100 to 500</text>
+                    </g>
+                    <g transform = 'translate (450,0)'>
+                    <circle cx = '0' cy ='20' r = '10' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                        <text dominant-baseline = 'central' x= '25' y= '20'>500 to 1000</text>
+                        </g>
+                    <g transform = 'translate (600,0)'>
+                    <circle cx = '0' cy ='20' r = '13' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                    <text dominant-baseline = 'central' x= '25' y= '20'>1000 and more</text>
+                    </g>
+                </svg>
+                </div>
+    
+                <div id = 'legend_bubble' width = '1500' height = '100'>
+                <svg id ='legend_bubble_size' width = '1500' height = '50'>
+                    <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
+                    font-family = 'Tekton Pro' font-size = '14'
+                    transform = 'translate (70,0)' >
+                    <g transform = 'translate (-70,0)'>
+                    <text dominant-baseline = 'central' x= '25' y= '20'>
+                        Note: female_rate + male_rate = 1; teenager_rate + youth_rate + middle-aged_rate + senior_rate = 1 </text>
+                    </g>
+                </svg>
+                </div>
+            <div id = 'button' >
+                <button type="button" id = "clear_button" class = 'button001' 
+                onclick = "clearView();" style=' text-align: center'>Clear All Selection</button>
 
                 <!-- <button title="Hello World!">Sample Button</button> -->
 
-                <label class="switch" style='position:absolute; left: 650px; top: 920px' title="To compare the rates of different labels!" alt="To compare the rates of different labels!">
+                <label class="switch"  title="To compare the rates of different labels!" alt="To compare the rates of different labels!">
                 <input type="checkbox" id="togBtn">
                 <div class="slider round" onclick = "toggle()">
                 <!--ADDED HTML -->
@@ -103,57 +143,18 @@
                 </label>
             </div>
 
-            <div id = 'legend_bubble' width = '1500' height = '100'>
-            <svg id ='legend_bubble_size' width = '1500' height = '50'>
-                <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
-                font-family = 'Tekton Pro' font-size = '14'
-                transform = 'translate (70,0)' >
-                <g transform = 'translate (-70,0)'>
-                <text dominant-baseline = 'central' x= '25' y= '20'>Customer Volume count:</text>
-                </g>
-                <g transform = 'translate (150,0)'>
-                <circle cx = '0' cy ='20' r = '3' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
-                <text dominant-baseline = 'central' x= '40' y= '20'>below 100</text>
-                </g>
-                <g transform = 'translate (300,0)'>
-                <circle cx = '0' cy ='20' r = '6' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
-                <text dominant-baseline = 'central' x= '25' y= '20'>100 to 500</text>
-                </g>
-                <g transform = 'translate (450,0)'>
-                <circle cx = '0' cy ='20' r = '10' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
-                    <text dominant-baseline = 'central' x= '25' y= '20'>500 to 1000</text>
-                    </g>
-                <g transform = 'translate (600,0)'>
-                <circle cx = '0' cy ='20' r = '13' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
-                <text dominant-baseline = 'central' x= '25' y= '20'>1000 and more</text>
-                </g>
-            </svg>
-            </div>
-
-            <div id = 'legend_bubble' width = '1500' height = '100'>
-            <svg id ='legend_bubble_size' width = '1500' height = '50'>
-                <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
-                font-family = 'Tekton Pro' font-size = '14'
-                transform = 'translate (70,0)' >
-                <g transform = 'translate (-70,0)'>
-                <text dominant-baseline = 'central' x= '25' y= '20'>
-                    Note: female_rate + male_rate = 1; teenager_rate + youth_rate + middle-aged_rate + senior_rate = 1 </text>
-                </g>
-            </svg>
-            </div>
+            
 
             <!-- A div container for the main visualization -->
-            <div id='vis' style='width:700px; margin:0 auto;' class="">
+            <div id='vis' style='margin:0 auto;' class="">
                 <!-- <svg class='chart-outer'><g class='chart'></g></svg> -->
             </div>
 
-            <div style = 'text-align: center; width: 1500px'>
-                <h4 style = 'color :rgb(41, 41, 41); font-size : 10px'>*The dataset is collected by PlaceInt from Hopson.</h4>
-            </div>
+            
 
             <script type="text/javascript" src="/static/js/a4_viz.js"></script>
 
-
+        </main>
             <!------------------------------- footer ---------------------------->
             <footer class="mt-auto text-white-50">
                 <p>Data credit: Beijing Chaoyang Hopson One by <a href="https://www.placeint.net/" class="text-white">@placeint</a>.</p>
@@ -165,7 +166,7 @@
 
 
 
-</html>
+
 
 <!-- <div class='form-group'>
   <label for='franchise-var'>Label of Customer:</label>

@@ -10,6 +10,7 @@
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/cover/">
     <link rel="stylesheet" href="/static/css/button.css" />
+    <link rel='stylesheet' href='/static/css/dropdowns.css'/>
 
 
     <!-- Bootstrap core CSS -->
@@ -39,7 +40,7 @@
           border-radius: 10px;
           text-align: center;
           padding: 8px;
-          font: 15px sans-serif;
+          font: 10px 'Tekton Pro';
           color: #FFF;
           background: rgba(0, 0, 0, 0);
           opacity: 1;
@@ -54,7 +55,7 @@
           border-radius: 10px;
           text-align: center;
           padding: 8px;
-          font: 15px sans-serif;
+          font: 10px 'Tekton Pro';
           color: #FFF;
           background: rgba(255, 255, 255, 0);
           opacity: 1;
@@ -77,18 +78,32 @@
           align: middle;
           position: absolute;
         }
+
         #category {
-          left: 50%;
-          top:88%;
-          transform: translateX(-50%);
+          left: 40%;
+          top:89%;
+          transform: translateX(0%);
           position:absolute;
+          width: 130px;
+          height:28px;
+          text-align:middle;
+          background-color: #fff;
+          border-color: #8474bb;
+          
         }
+
         #date{
           left: 50%;
-          top:91%;
-          transform: translateX(-50%);
+          top:89%;
+          transform: translateX(0%);
           position:absolute;
+          background-color:#fff;
+          border-color: #8474bb;
+          fill:rgba(0, 0, 0, 0)
         }
+
+        .select text{
+          fill: rgb(255, 255, 255)}
 
 
     /* original */
@@ -105,6 +120,9 @@
           font-size: 3.5rem;
         }
       }
+
+
+      
     </style>
 
 
@@ -155,6 +173,9 @@
           <option value="gender">By Gender</option>
           <option value="age">By Age</option>
         </select>
+
+
+
 
         <input type="date" id="date" class = 'select' value="2021-02-01" min="2021-02-01" max="2021-02-28"
                onchange = 'update(t)'>
