@@ -1,61 +1,210 @@
-var margin = {top: 1, right: 1, bottom: 6, left: 1},
-    width = 960 - margin.left - margin.right,
-    height = 500 - margin.top - margin.bottom;
+//initialize parameters<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+var outerWidth = 0.7 * window.innerWidth;
+var outerHeight = 0.6 * window.innerHeight;
+
+var size_normal = 4;
+var size_hover = 6.5;
+var size_hover_rest = 1;
+
+var div = d3.select("body").append("div")
+    .attr("class", "tooltip")
+    .style("opacity", 0);
+
+var div2 = d3.select("body").append("div")
+    .attr("class", "tooltip2")
+    .style("opacity", 0);
+
+var gender_colorScale = d3.scale.ordinal()
+                                .domain(['Male', 'Female', 'Fashion', 'Food', 'ConsumerElectronics', 'Accessories', 'KidsBabies', 'Jewelry'])
+                                .range(['#76B3BD', '#DFA899' , '#8699ba', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#ce9757']);
+
+var age_colorScale = d3.scale.ordinal()
+                                .domain(['Teenager', 'Youth', 'MiddleAged', 'Senior', 'Fashion', 'Food', 'ConsumerElectronics', 'Accessories', 'KidsBabies', 'Jewelry'])
+                                .range(['#76B3BD', '#DFA899' , '#3D94B8', '#3D6F94', '#8699ba', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#ce9757']);
+
+var svg = d3.select(".svg1")
+            .attr("width", outerWidth)
+            .attr("height", outerHeight)
+            // .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+d3.select("canvas")
+  .attr("width", outerWidth)
+  .attr("height", outerHeight)
+
+var width = outerWidth,
+    height = outerHeight;
 
 var formatNumber = d3.format(",.0f"),
     format = function(d) { return formatNumber(d) + " TWh"; },
-    color = d3.scale.category20();
-
-var svg = d3.select("svg")
-            .attr("width", width + margin.left + margin.right)
-            .attr("height", height + margin.top + margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+    color = d3.scale.category10();
 
 var sankey = d3.sankey()
-    .nodeWidth(15)
-    .nodePadding(10)
-    .size([width, height]);
+               .nodeWidth(17)
+               .nodePadding(15)
+               .size([outerWidth, outerHeight])
+var t;
 
-var path = sankey.link();
-console.log(path)
-var freqCounter = 1;
 
-d3.json("/static/json/test.json", function(energy) {
+var update = function(){
 
-  sankey
-      .nodes(energy.nodes)
-      .links(energy.links)
-      .layout(32);
+  //create Sankey <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  var category = document.getElementById("category").value;
+  var date = document.getElementById("date").value;
+  var url = '/static/js/data/' + category + "_" + date + '.json'
+  var flow, path;
 
-  var link = svg.append("g").selectAll(".link")
-      .data(energy.links)
+  $.ajax({
+    url: url,
+    async: false,
+    dataType: 'json',
+    success: function (json) {
+      flow = json;
+    }
+  });
+
+  sankey.nodes(flow.nodes)
+        .links(flow.links)
+        .layout(32);
+
+  path = sankey.link();
+
+  d3.select("canvas").node().getContext("2d").clearRect(0,0,outerWidth,outerHeight);
+  d3.selectAll('.alllink').remove();
+  d3.selectAll(".allnode").remove();
+
+  var link = svg.append("g")
+      .attr("class", "alllink")
+      .selectAll(".link")
+      .data(flow.links)
     .enter().append("path")
-      .attr("class", "link")
+      .attr("class", d => {return "link l" + d.source.name + " " + d.target.name})
       .attr("d", path)
-      .style("stroke-width", function(d) { return Math.max(1, d.dy); })
+      .style("stroke-width", function(d) { return Math.max(1, d.dy ); })
+      .style("stroke-opacity", 0.05)
+      .on("mouseover", d => {
+        d3.selectAll(".link").filter("." + d.source.name).filter("." + d.target.name)
+          .style("stroke-opacity", 0.1)
+
+        flow.links.forEach(function (link) {
+          if(link.source.name === d.source.name && link.target.name === d.target.name){
+            link.particleSize = size_hover;}
+          else{link.particleSize = size_hover_rest;}
+         })
+
+        div.transition().duration(200)
+        .style("display", "inline")
+        .style("opacity", 1);
+
+      })
+      .on("mousemove", function(d){
+        div
+           .html("<p>" + d.source.name + " -> " + d.target.name + "<br/>" + "<b>" + d.value + " people<b/><p>")
+           .style("left", (d3.event.pageX - 130) + "px")
+           .style("top", (d3.event.pageY - 75) + "px");
+      })
+      .on("mouseout", d => {
+        d3.selectAll(".link").filter("." + d.source.name).filter("." + d.target.name)
+          .style("stroke-opacity", 0.05)
+
+        flow.links.forEach(function (link) {
+          link.particleSize = size_normal;
+         })
+
+        div.transition().duration(200)
+          .style("display", "none")
+          .style("opacity", 0);
+
+      })
       .sort(function(a, b) { return b.dy - a.dy; });
 
-  link.append("title")
-      .text(function(d) { return d.source.name + " → " + d.target.name + "\n" + format(d.value); });
-
-  var node = svg.append("g").selectAll(".node")
-      .data(energy.nodes)
+  var node = svg.append("g")
+      .attr("class", "allnode")
+      .selectAll(".node")
+      .data(flow.nodes)
     .enter().append("g")
-      .attr("class", "node")
-      .attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; })
-    .call(d3.behavior.drag()
-      .origin(function(d) { return d; })
-      .on("dragstart", function() { this.parentNode.appendChild(this); })
-      .on("drag", dragmove));
+      .attr("class", d => "node n" + d.name)
+      .attr("transform", d => "translate(" + d.x + "," + d.y +  ")")
+      .on("mouseover", d => {
+        d3.selectAll("."+d.name)
+          .style("stroke-opacity", 0.1);
+
+        flow.links.forEach(function (link) {
+          if(link.source.name === d.name || link.target.name === d.name){
+            link.particleSize = size_hover;}
+          else{link.particleSize = size_hover_rest;}
+         })
+
+         div2.transition().duration(200)
+         .style("display", "inline")
+         .style("opacity", 1);
+      })
+      .on("mousemove", function(d){
+        var text = "";
+        if(d.sourceLinks.length){
+          d.sourceLinks.forEach(function(link){
+              var perc = d3.format(".0%")(link.value / d.value)
+              var name = link.target.name
+              text += perc + " " + name + "<br/>"
+              })
+          div2
+             .html("<p>"+ text + "<p>")
+             .style("text-align", "right")
+             .style("width", "200px")
+             .style("height", "150px")
+             .style("left", (d3.event.pageX - 230) + "px")
+             .style("top", (d3.event.pageY - 75) + "px");
+        } else {
+          d.targetLinks.forEach(function(link){
+              var perc = d3.format(".0%")(link.value / d.value)
+              var name = link.source.name
+              text += perc + " " + name + "<br/>"
+              })
+          div2
+             .html("<p>"+ text + "<p>")
+             .style("text-align", "left")
+             .style("width", "150px")
+             .style("height", "60px")
+             .style("left", (d3.event.pageX + 30) + "px")
+             .style("top", (d3.event.pageY - 25) + "px");
+        }
+      })
+      .on("mouseout",d => {
+        d3.selectAll("."+d.name)
+          .style("stroke-opacity", 0.05)
+
+        flow.links.forEach(function (link) {
+          link.particleSize = size_normal;
+        })
+
+        div2.transition().duration(200)
+          .style("display", "none")
+          .style("opacity", 0);
+      })
+    .call(
+      d3.behavior.drag()
+        .origin(function(d) { return d; })
+        .on("dragstart", function() { this.parentNode.appendChild(this); })
+        .on("drag", dragmove)
+      )
+
+  function dragmove(d) {
+    d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+    sankey.relayout();
+    link.attr("d", path);
+  }
 
   node.append("rect")
+      .attr("class", d => "rect r" + d.name)
       .attr("height", function(d) { return d.dy; })
       .attr("width", sankey.nodeWidth())
-      .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
+      // .style("fill", function(d) { return d.color = color(d.name.replace(/ .*/, "")); })
+      .style("fill", function(d) {
+        if(category == 'gender')
+        {return d.color = gender_colorScale(d.name) ;}
+        else if(category == 'age')
+        {return d.color = age_colorScale(d.name) ;}
+      })
       .style("stroke", "none")
-    .append("title")
-      .text(function(d) { return d.name + "\n" + format(d.value); });
 
   node.append("text")
       .attr("x", -6)
@@ -68,76 +217,88 @@ d3.json("/static/json/test.json", function(energy) {
       .attr("x", 6 + sankey.nodeWidth())
       .attr("text-anchor", "start");
 
-  function dragmove(d) {
-    d3.select(this).attr("transform", "translate(" + d.x + "," + (d.y = Math.max(0, Math.min(height - d.dy, d3.event.y))) + ")");
+  if(category == "gender"){
+    d3.selectAll(".nFemale")
+      .attr("transform", "translate(" + flow.nodes[1].x + "," + (flow.nodes[1].y = outerHeight - flow.nodes[1].dy) + ")");
     sankey.relayout();
     link.attr("d", path);
+    d3.select("canvas").node().getContext("2d").clearRect(0,0,outerWidth,outerHeight);
+  }else if (category == 'age'){
+    d3.selectAll(".nSenior")
+      .attr("transform", "translate(" + flow.nodes[3].x + "," + (flow.nodes[3].y = outerHeight - flow.nodes[3].dy) + ")");
+    d3.selectAll(".nMiddleAged")
+      .attr("transform", "translate(" + flow.nodes[2].x + "," + (flow.nodes[2].y = outerHeight - flow.nodes[3].dy - flow.nodes[2].dy - sankey.nodePadding()) + ")");
+
+    sankey.relayout();
+    link.attr("d", path);
+    d3.select("canvas").node().getContext("2d").clearRect(0,0,outerWidth,outerHeight);
   }
 
-
-
-
-  var linkExtent = d3.extent(energy.links, function (d) {return d.value});
+  //create Particles <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+  var linkExtent = d3.extent(flow.links, function (d) {return d.value});
   var frequencyScale = d3.scale.linear().domain(linkExtent).range([0.05,1]);
-  var particleSize = d3.scale.linear().domain(linkExtent).range([1,5]);
-
-
-  energy.links.forEach(function (link) {
-    link.freq = frequencyScale(link.value);
-    link.particleSize = 2;
-    link.particleColor = d3.scale.linear().domain([0,1])
-    .range([link.source.color, link.target.color]);
-  })
-
-  var t = d3.timer(tick, 1000);
+  var particleSizeScale = d3.scale.linear().domain(linkExtent).range([1,5]);
+  var particleSpeedScale = d3.scale.linear().domain(linkExtent).range([1, 5]);
   var particles = [];
 
-  function tick(elapsed, time) {
+  flow.links.forEach(function (link) {
+    link.freq = frequencyScale(link.value);
+    link.particleSize = size_normal;
+    link.particleColor = d3.scale.linear().domain([0,1]).range([link.source.color, link.target.color]);
+  })
 
-    particles = particles.filter(function (d) {return d.current < d.path.getTotalLength()});
-
-    d3.selectAll("path.link")
-    .each(
-      function (d) {
-//        if (d.freq < 1) {
-        for (var x = 0;x<2;x++) {
-          var offset = (Math.random() - .5) * (d.dy - 4);
-          if (Math.random() < d.freq) {
-            var length = this.getTotalLength();
-            particles.push({link: d, time: elapsed, offset: offset, path: this, length: length, animateTime: length, speed: 0.5 + (Math.random())})
+  function tick(elapsed) {
+    //decide how many number of new particles to add in every elapsed time
+    var density = 2;
+    //remove particles reach the end
+    particles = particles.filter(function (d) {return d.currentLength < d.path.getTotalLength()});
+    //for each path, do the following:
+    d3.selectAll("path.link").each(
+        function (d) {
+          //d is flow.link
+          //"this" is <path>
+          for (var x = 0; x < density; x++) {
+            var offset = (Math.random() - .53) * (d.dy - 4);
+            if (Math.random() < d.freq) {
+              var length = this.getTotalLength();
+              particles.push({
+                link: d, time: elapsed, offset: offset, path: this, length: length,
+                animateTime: length, speed: particleSpeedScale(d.value) + Math.random()
+              })
+              //p_counts ++;
+            }
           }
-        }
-
-//        }
-/*        else {
-          for (var x = 0; x<d.freq; x++) {
-            var offset = (Math.random() - .5) * d.dy;
-            particles.push({link: d, time: elapsed, offset: offset, path: this})
-          }
-        } */
-      });
-
+        });
     particleEdgeCanvasPath(elapsed);
+    // if(elapsed > 5000){t.stop()};
   }
 
   function particleEdgeCanvasPath(elapsed) {
-    var context = d3.select("canvas").node().getContext("2d")
-
-    context.clearRect(0,0,1000,1000);
-
-      context.fillStyle = "gray";
-      context.lineWidth = "1px";
+    //get canvas 2d context for drawing
+    var context = d3.select("canvas").node().getContext("2d");
+    //clear previous particles
+    context.clearRect(0,0,outerWidth,outerHeight);
+    //draw particles
     for (var x in particles) {
-        var currentTime = elapsed - particles[x].time;
-//        var currentPercent = currentTime / 1000 * particles[x].path.getTotalLength();
-        particles[x].current = currentTime * 0.15 * particles[x].speed;
-        var currentPos = particles[x].path.getPointAtLength(particles[x].current);
+        //the duration this particle exists
+        var duration = elapsed - particles[x].time;
+        //the speed controller
+        var speedIndex = 0.05;
+        //where the particle is now
+        particles[x].currentLength = duration * speedIndex * particles[x].speed;
+        var currentPos = particles[x].path.getPointAtLength(particles[x].currentLength);
         context.beginPath();
-      context.fillStyle = particles[x].link.particleColor(1);
-        context.arc(currentPos.x,currentPos.y + particles[x].offset,particles[x].link.particleSize,0,2*Math.PI);
+        context.fillStyle = particles[x].link.particleColor(particles[x].currentLength/particles[x].path.getTotalLength());
+        // context.arc(currentPos.x, currentPos.y + particles[x].offset, particles[x].link.particleSize, 0, 2*Math.PI); // draw circle
+        context.rect(currentPos.x, currentPos.y + particles[x].offset*0.95, particles[x].link.particleSize, particles[x].link.particleSize)
         context.fill();
     }
   }
 
+  if(t !== undefined ){
+    t.stop();
+  }
+  t = d3.timer(tick, 0);
+}
 
-});
+update();

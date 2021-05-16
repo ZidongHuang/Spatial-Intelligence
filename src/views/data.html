@@ -1,11 +1,12 @@
 <!DOCTYPE html>
+<html lang="en" class="mw-100 mh-100"></html>
 <!--
 //flag = 7/4 Wed afternoon
 //newest version with: dynamic scaling, single tooltip, complete dropdown, chained tooltip, click to stay
 //pending: vertical zoom
 -->
 
-<html>
+
 
 <head>
 <meta charset="utf-8">
@@ -33,26 +34,27 @@
 </head>
 
 
-    <body class="d-flex h-100 text-center text-white bg-dark">
-        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+    <body class="d-flex mw-75 mh-75 text-center text-white bg-dark" >
+        <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column mw-100">
             <!------------------------ header ------------------------->
             <header class="mb-auto">
                 <div>
                 <h3 class="float-md-start mb-0">Spatial Intelligence</h3>
                 <nav class="nav nav-masthead justify-content-center float-md-end">
-                    <a class="nav-link" aria-current="page" href="/">Home</a>
-                    <a class="nav-link active" href="/data">Data</a>
-                    <a class="nav-link" href="/stores">Model</a>
+                    <a class="nav-link" aria-current="page" href="/">HOME</a>
+                    <a class="nav-link active" href="/data">DATA</a>
+                    <a class="nav-link" href="/stores">MODEL</a>
                 </nav>
                 </div>
             </header>
         
             <!------------------------ main content ------------------------->
             <!-- A div contaimer for the customer type selector dropdown menu -->
-            <div id='toolbar'></div>
+            <main class="px-3" width = '1500' >
+            <div id='toolbar' width = '1500' ></div>
 
-            <div id= 'legend'>
-                <svg id ='legend_type_color' width = '1000' height = '30'>
+            <div id= 'legend' width = '1500' height = '100'>
+                <svg id ='legend_type_color' width = '1500' height = '30'>
                 <g class = 'legendgroup' id = 'legend_type_color' text-anchor = 'start'
                 font-family = 'sans-serif' font-size = '14' 
                 transform = 'translate (70,0)' >
@@ -60,39 +62,78 @@
                         <text dominant-baseline = 'central' x= '25' y= '10'>Type:</text>
                     </g>
                     <g transform = 'translate (20,0)'>
-                        <rect width = '15' height ='15' fill ='#FF5851'></rect>
+                        <rect width = '15' height ='15' fill ='#8699ba'></rect>
                         <text dominant-baseline = 'central' x= '35' y= '10'>fashion</text>
                         </g>
                     <g transform = 'translate (140,0)'>
-                        <rect width = '15' height ='15' fill ='#414A6B'></rect>
+                        <rect width = '15' height ='15' fill ='#aa406a'></rect>
                         <text dominant-baseline = 'central' x= '25' y= '10'>accessories</text>
                         </g>
                     <g transform = 'translate (260,0)'>
-                        <rect width = '15' height ='15' fill ='#044013'></rect>
+                        <rect width = '15' height ='15' fill ='#e6ba79'></rect>
                         <text dominant-baseline = 'central' x= '45' y= '10'>food</text>
                         </g>
                     <g transform = 'translate (380,0)'>
-                        <rect width = '15' height ='15' fill ='#B49A85'></rect>
+                        <rect width = '15' height ='15' fill ='#ce9757'></rect>
                         <text dominant-baseline = 'central' x= '35' y= '10'>jewelry</text>
                         </g>
                     <g transform = 'translate (500,0)'>
-                            <rect width = '15' height ='15' fill ='#F3C130'></rect>
+                            <rect width = '15' height ='15' fill ='#8474bb'></rect>
                             <text dominant-baseline = 'central' x= '25' y= '10'>kids_babies</text>
                             </g>
                     <g transform = 'translate (620,0)'>
-                            <rect width = '15' height ='15' fill ='#1C1B20'></rect>
+                            <rect width = '15' height ='15' fill ='#da85be'></rect>
                             <text dominant-baseline = 'central' x= '35' y= '10'>consumer_electronics</text>
                 </g>
 
                 </svg>
             </div>
-
-            <div id = 'button' style='width:1500px;'>
-                <button type="button" id = "clear_button" class = 'button001' onclick = "clearView();" style='position:absolute; left: 800px; top: 920px; text-align: center'>Clear All Selection</button>
-
+            <div id = 'legend_bubble' width = '1500' height = '100'>
+                <svg id ='legend_bubble_size' width = '1500' height = '50'>
+                    <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
+                    font-family = 'Tekton Pro' font-size = '14'
+                    transform = 'translate (70,0)' >
+                    <g transform = 'translate (-70,0)'>
+                    <text dominant-baseline = 'central' x= '25' y= '20'>Customer Volume count:</text>
+                    </g>
+                    <g transform = 'translate (150,0)'>
+                    <circle cx = '0' cy ='20' r = '3' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                    <text dominant-baseline = 'central' x= '40' y= '20'>below 100</text>
+                    </g>
+                    <g transform = 'translate (300,0)'>
+                    <circle cx = '0' cy ='20' r = '6' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                    <text dominant-baseline = 'central' x= '25' y= '20'>100 to 500</text>
+                    </g>
+                    <g transform = 'translate (450,0)'>
+                    <circle cx = '0' cy ='20' r = '10' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                        <text dominant-baseline = 'central' x= '25' y= '20'>500 to 1000</text>
+                        </g>
+                    <g transform = 'translate (600,0)'>
+                    <circle cx = '0' cy ='20' r = '13' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
+                    <text dominant-baseline = 'central' x= '25' y= '20'>1000 and more</text>
+                    </g>
+                </svg>
+                </div>
+    
+                <div id = 'legend_bubble' width = '1500' height = '100'>
+                <svg id ='legend_bubble_size' width = '1500' height = '50'>
+                    <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
+                    font-family = 'Tekton Pro' font-size = '14'
+                    transform = 'translate (70,0)' >
+                    <g transform = 'translate (-70,0)'>
+                    <text dominant-baseline = 'central' x= '25' y= '20' width = '1500' height = '30'>
+                        Note: female_rate + male_rate = 1; teenager_rate + youth_rate + middle-aged_rate + senior_rate = 1 </text>
+                    </g>
+                </svg>
+                </div>
+            <div id = 'button01' height='50' >
+                <button type="button" id = "clear_button" class = 'button001' 
+                onclick = "clearView();" style=' text-align: center'>Clear All Selection</button>
+            </div>
                 <!-- <button title="Hello World!">Sample Button</button> -->
 
-                <label class="switch" style='position:absolute; left: 650px; top: 920px' title="To compare the rates of different labels!" alt="To compare the rates of different labels!">
+                <div id = 'button02' height='50' >
+                <label class="switch"  title="To compare the rates of different labels!" alt="To compare the rates of different labels!">
                 <input type="checkbox" id="togBtn">
                 <div class="slider round" onclick = "toggle()">
                 <!--ADDED HTML -->
@@ -103,60 +144,21 @@
                 </label>
             </div>
 
-            <div id = 'legend_bubble' width = '1500' height = '100'>
-            <svg id ='legend_bubble_size' width = '1500' height = '50'>
-                <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
-                font-family = 'Tekton Pro' font-size = '14'
-                transform = 'translate (70,0)' >
-                <g transform = 'translate (-70,0)'>
-                <text dominant-baseline = 'central' x= '25' y= '20'>Customer Volume count:</text>
-                </g>
-                <g transform = 'translate (150,0)'>
-                <circle cx = '0' cy ='20' r = '3' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
-                <text dominant-baseline = 'central' x= '40' y= '20'>below 100</text>
-                </g>
-                <g transform = 'translate (300,0)'>
-                <circle cx = '0' cy ='20' r = '6' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
-                <text dominant-baseline = 'central' x= '25' y= '20'>100 to 500</text>
-                </g>
-                <g transform = 'translate (450,0)'>
-                <circle cx = '0' cy ='20' r = '10' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
-                    <text dominant-baseline = 'central' x= '25' y= '20'>500 to 1000</text>
-                    </g>
-                <g transform = 'translate (600,0)'>
-                <circle cx = '0' cy ='20' r = '13' fill ='#c2c8c5' stroke-color = 'darkgray'></circle>
-                <text dominant-baseline = 'central' x= '25' y= '20'>1000 and more</text>
-                </g>
-            </svg>
-            </div>
-
-            <div id = 'legend_bubble' width = '1500' height = '100'>
-            <svg id ='legend_bubble_size' width = '1500' height = '50'>
-                <g class = 'legendgroup' id = 'legend_bubble_size' text-anchor = 'start'
-                font-family = 'Tekton Pro' font-size = '14'
-                transform = 'translate (70,0)' >
-                <g transform = 'translate (-70,0)'>
-                <text dominant-baseline = 'central' x= '25' y= '20'>
-                    Note: female_rate + male_rate = 1; teenager_rate + youth_rate + middle-aged_rate + senior_rate = 1 </text>
-                </g>
-            </svg>
-            </div>
+            
 
             <!-- A div container for the main visualization -->
-            <div id='vis' style='width:1500px;' class="">
+            <div id='vis' style='margin:0 auto;' class="" width = '1500' height = '30'>
                 <!-- <svg class='chart-outer'><g class='chart'></g></svg> -->
             </div>
 
-            <div style = 'text-align: center; width: 1500px'>
-                <h4 style = 'color :rgb(41, 41, 41); font-size : 10px'>*The dataset is collected by PlaceInt from Hopson.</h4>
-            </div>
+            
 
             <script type="text/javascript" src="/static/js/a4_viz.js"></script>
 
-
+        </main>
             <!------------------------------- footer ---------------------------->
             <footer class="mt-auto text-white-50">
-                <p>Data credit: Beijing Chaoyang Hopson One by <a href="https://www.placeint.net/" class="text-white">@placeint</a>.</p>
+                <h6>Data credit: Beijing Chaoyang Hopson One by <a href="https://www.placeint.net/" class="text-white">@placeint</a>.</h6>
             </footer>
             </div>  
   
@@ -165,7 +167,7 @@
 
 
 
-</html>
+
 
 <!-- <div class='form-group'>
   <label for='franchise-var'>Label of Customer:</label>

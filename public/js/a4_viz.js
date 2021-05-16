@@ -14,15 +14,16 @@ $.ajax({
 });
 
 
-var vis_width = window.innerWidth *0.85; // outer width
-var vis_height = window.innerHeight * 0.85; // outer height
+var vis_width = window.innerWidth *0.9; // outer width
+var vis_height = window.innerHeight * 0.8; // outer height
+
 var params = {num:'female_number', rate:'female_rate', min_date: "2021-2-1", max_date: "2021-2-28"}; // parameters to customize the chart
 var type_color = {accessories: 1, consumer_electronics: 2, fashions: 3, kids_babies: 4, jewelry: 5, food: 6};
 //var type= (['accessories', 'consumer_electronics','fashions', 'kids_babies','facilities', 'jewelry', 'food'])
 var floor_color = {B1: 1, B2: 2, L1: 3, L2: 4, L3: 5, L4: 6, L5: 7, L6: 8}
-var myColor= d3.scaleOrdinal().range(['#FF5851', '#F3C130', '#414A6B', '#1C1B20', '#B49A85', '#044013'])
+var myColor= d3.scaleOrdinal().range(['#8699ba', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#ce9757'])
 
-var margin = {top: 20, right: 100, bottom: 20, left: 100};
+var margin = {top: 20, right: 60, bottom: 20, left: 60};
 var width = vis_width - margin.left - margin.right, // inner width
     height = vis_height - margin.top - margin.bottom; // inner height
 var comparison = false;
@@ -38,7 +39,7 @@ d3.select('#vis')
 
 // Set the dimensions of the outer chart
 d3.select('.chart-outer')
-  .attr('width', 2000)
+  .attr('width', vis_width)
   .attr('height', vis_height);
 
 var clip = d3.select('.chart')
@@ -212,7 +213,7 @@ for (i = 0; i < storeName.length; i++) {
               .attr('r', function(d) { return Math.sqrt((bubbleScale(parseFloat(d[params['num']])))/Math.PI);})
               .style('stroke-width', 0)
               .style('fill',  function(d) { return myColor(d.type) })
-              .style('fill-opacity', 0.6)
+              .style('fill-opacity', 0.7)
               .on('mouseover', function(d,i){
                    d3.selectAll("#curve_" + d['store_name']).moveToFront();
                    d3.selectAll("#curve_" + d['store_name']).style("stroke-opacity", 1);
