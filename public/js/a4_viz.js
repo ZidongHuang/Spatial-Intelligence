@@ -21,7 +21,7 @@ var params = {num:'female_number', rate:'female_rate', min_date: "2021-2-1", max
 var type_color = {accessories: 1, consumer_electronics: 2, fashions: 3, kids_babies: 4, jewelry: 5, food: 6};
 //var type= (['accessories', 'consumer_electronics','fashions', 'kids_babies','facilities', 'jewelry', 'food'])
 var floor_color = {B1: 1, B2: 2, L1: 3, L2: 4, L3: 5, L4: 6, L5: 7, L6: 8}
-var myColor= d3.scaleOrdinal().range(['#ff9799', '#c65e8f', '#da85be', '#e6ba79', '#e6ba79', '#8699ba'])
+var myColor= d3.scaleOrdinal().range(['#8699ba', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#ce9757'])
 
 var margin = {top: 20, right: 60, bottom: 20, left: 60};
 var width = vis_width - margin.left - margin.right, // inner width
@@ -213,7 +213,7 @@ for (i = 0; i < storeName.length; i++) {
               .attr('r', function(d) { return Math.sqrt((bubbleScale(parseFloat(d[params['num']])))/Math.PI);})
               .style('stroke-width', 0)
               .style('fill',  function(d) { return myColor(d.type) })
-              .style('fill-opacity', 0.6)
+              .style('fill-opacity', 0.7)
               .on('mouseover', function(d,i){
                    d3.selectAll("#curve_" + d['store_name']).moveToFront();
                    d3.selectAll("#curve_" + d['store_name']).style("stroke-opacity", 1);

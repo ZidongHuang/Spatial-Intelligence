@@ -3,7 +3,9 @@
   /* Import the Baloo Thambi font from Google Fonts  */
   @import url('https://fonts.googleapis.com/css?family=Baloo+Thambi');
 
-  body {
+  
+  
+body {
     background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)); 
   }
   .form-group {
@@ -173,6 +175,13 @@
     font-family: Tekton Pro;
   }
 
+  .legend_type_color{
+   
+    right: 0px;
+    width: 1000px;
+    vertical-align: left;
+  }
+
   .legend_label {
     fill: #8FA2AC;
     text-anchor: middle;
@@ -289,3 +298,19 @@ title {
    margin-right: auto;
    width: 30%;
  }
+
+ #button01 {
+  left: 60%;
+  top:25%;
+  transform: translateX(0%);
+  position:absolute;
+   
+}
+
+#button02 {
+  left: 70%;
+  top:25%;
+  transform: translateX(0%);
+  position:absolute;
+   
+}

@@ -79,3 +79,11 @@
 
   .slider.round:before {
     border-radius: 50%;}
+
+    #togBtn{
+      left: 70%;
+      top:27%;
+      transform: translateY(0%);
+      position:absolute;
+      
+    }
