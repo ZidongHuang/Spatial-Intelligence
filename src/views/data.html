@@ -51,6 +51,16 @@
             <!------------------------ main content ------------------------->
             <!-- A div contaimer for the customer type selector dropdown menu -->
             <main class="px-3" width = '1500' >
+   <div id = 'spacer01' style = 'background-color: dark;'width = '1500' height ='200'></div>          
+  <div>
+    <h5 style = 'color: rgb(255, 255, 255); font-size: 18px'>The following graph helps you understand the customer volume and enter rates visited the shopping mall in Feb 2021.</h5>
+    <h3 style = 'color: rgb(255, 255, 255); font-size: 18px'>Bubble Size represents the number of current customer type entering the store. Percentage = number / total entering number.   </h3>
+    <h6 style = 'color: rgb(255, 255, 255); font-size:20px'>CLICK the bubble if you would like to keep its trend path stay on the screen for comparison. Click again to remove it. </h6>
+  </br>
+  </div>
+
+
+
             <div id='toolbar' width = '1500' ></div>
 
             <div id= 'legend' width = '1500' height = '100'>
@@ -125,22 +135,23 @@
                         Note: female_rate + male_rate = 1; teenager_rate + youth_rate + middle-aged_rate + senior_rate = 1 </text>
                     </g>
                 </svg>
+                <div id = 'button01' height='50' >
+                    <button type="button" id = "clear_button" class = 'button001' 
+                    onclick = "clearView();" style=' text-align: center'>Clear All Selection</button>
                 </div>
-            <div id = 'button01' height='50' >
-                <button type="button" id = "clear_button" class = 'button001' 
-                onclick = "clearView();" style=' text-align: center'>Clear All Selection</button>
-            </div>
-                <!-- <button title="Hello World!">Sample Button</button> -->
-
-                <div id = 'button02' height='50' >
-                <label class="switch"  title="To compare the rates of different labels!" alt="To compare the rates of different labels!">
-                <input type="checkbox" id="togBtn">
-                <div class="slider round" onclick = "toggle()">
-                <!--ADDED HTML -->
-                <span class="on">Comparison On</span>
-                <span class="off">Comparison Off</span>
-                <!--END-->
+                    <!-- <button title="Hello World!">Sample Button</button> -->
+    
+                    <div id = 'button02' height='50' >
+                    <label class="switch"  title="To compare the rates of different labels!" alt="To compare the rates of different labels!">
+                    <input type="checkbox" id="togBtn">
+                    <div class="slider round" onclick = "toggle()">
+                    <!--ADDED HTML -->
+                    <span class="on">Comparison On</span>
+                    <span class="off">Comparison Off</span>
+                    <!--END-->
+                    </div>
                 </div>
+            
                 </label>
             </div>
 
