@@ -129,6 +129,8 @@
     <!-- Custom styles for this template -->
     <link href="/static/css/cover.css" rel="stylesheet">
   </head>
+  
+  
   <body class="d-flex mw-100 mh-100 text-center text-white bg-dark" width = '1500'>
 
     <div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column mw-100">
@@ -151,7 +153,9 @@
 
         <canvas></canvas>
         <!-- <svg class = "svg2"></svg> -->
+        <div class = 'sankey'>
         <svg class = "svg1"></svg>
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.16/d3.min.js" charset="utf-8" type="text/javascript"></script>
         <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.0/js/ion.rangeSlider.min.js"></script>
@@ -164,7 +168,7 @@
         <a href="/stores" class="btn btn-lg btn-secondary fw-bold border-white bg-white">Explore in 3D</a>
         </p> -->
 
-        <div class="container_button">
+        <div class="container_button" height = 900>
           <a href="/data" class="btn_01">Explore Data</a>
           <a href="/stores" class="btn_01">Explore in 3D</a>
         </div>
@@ -188,7 +192,7 @@
     <footer class="mt-auto text-white-50">
         <h6>Data credit: Beijing Chaoyang Hopson One by<a href="https://www.placeint.net/" class="text-white">@placeint</a></h6>
     </footer>
-    </div>
+  
 
   </body>
 </html>

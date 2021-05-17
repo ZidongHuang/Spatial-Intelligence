@@ -9,7 +9,7 @@ var store_names={}
 var all_data_in_floor={}
 var cnt=0
 var property_id = "beijing_hopson_one"
-const color_platter= ['#630063','#FF0091','#FF7D91','#FFAB91','#bdbdbd'];   
+const color_platter= ['#e6ba79', '#da85be', '#aa406a', '#8474bb', '#3caea3'];   
 const default_data = [{'age17to30': 0,
     'age31to45': 0,
     'age46to60': 0,
@@ -218,18 +218,19 @@ function createRadarChart(data){
         chart: {
         height: 300,
         type: 'radar',
+        
     },
     dataLabels: {
         enabled: false
     },
     plotOptions: {
         radar: {
-        size:120,
+        size:110,
         polygons: {
             strokeColors: 'white',
             strokeWidth: 0.5,
             fill: {
-            colors: ['rgba(255, 0, 145,0.3)','rgba(189,189,189,0.3)']
+            colors: ['#aa406a', '#8474bb', '#3caea3']
             }
         }
         }
@@ -400,7 +401,7 @@ function createCircBarChart(data){
           }
         }
       },
-      colors: ['#FF7D91', '#FF0091','#630063'],
+      colors: ['#aa406a', '#8474bb', '#3caea3'],
       labels: ['Enter Number', 'Exit Number', 'Watcher Number'],
       legend: {
         show: true,
@@ -593,14 +594,14 @@ function DonutChartBasic(data,labels,colors){
         },
       },
       title: {
-        text: 'Customer Feature Rate',
+        text: 'Customer Feature Rate:',
         align: 'left',
         margin: 12,
         offsetX: 0,
         offsetY: 0,
         floating: true,
         style: {
-          fontSize:  '10px',
+          fontSize:  '14px',
           fontWeight:  'bold',
           fontFamily:  undefined,
           color:  'white'

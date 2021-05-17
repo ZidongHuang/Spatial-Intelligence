@@ -21,7 +21,7 @@ var params = {num:'female_number', rate:'female_rate', min_date: "2021-2-1", max
 var type_color = {accessories: 1, consumer_electronics: 2, fashions: 3, kids_babies: 4, jewelry: 5, food: 6};
 //var type= (['accessories', 'consumer_electronics','fashions', 'kids_babies','facilities', 'jewelry', 'food'])
 var floor_color = {B1: 1, B2: 2, L1: 3, L2: 4, L3: 5, L4: 6, L5: 7, L6: 8}
-var myColor= d3.scaleOrdinal().range(['#8699ba', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#ce9757'])
+var myColor= d3.scaleOrdinal().range(['#20639b', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#3caea3'])
 
 var margin = {top: 20, right: 60, bottom: 20, left: 60};
 var width = vis_width - margin.left - margin.right, // inner width
@@ -214,6 +214,7 @@ for (i = 0; i < storeName.length; i++) {
               .style('stroke-width', 0)
               .style('fill',  function(d) { return myColor(d.type) })
               .style('fill-opacity', 0.7)
+              
               .on('mouseover', function(d,i){
                    d3.selectAll("#curve_" + d['store_name']).moveToFront();
                    d3.selectAll("#curve_" + d['store_name']).style("stroke-opacity", 1);
@@ -244,6 +245,7 @@ for (i = 0; i < storeName.length; i++) {
                   }
                   hideDetails();
                 })
+
               .on('click', (d,i) => {
 
                 clicked[d.store_name] = !clicked[d.store_name];
@@ -273,7 +275,7 @@ for (i = 0; i < storeName.length; i++) {
                         .text(params['rate'] + " of " + d['store_name'])
                         .attr('font-size', 18)
                         .style('fill',  function(color) { return myColor(type_color[d.type]) })
-                        .style('opacity', 1);
+                        .style('opacity', 0);
                 }
                 else {
                   d3.selectAll("#stay_text_" + d['store_name'] + "_" + params['rate']).remove();
@@ -482,7 +484,9 @@ var showDetails = function(data, element) {
   pos = $(element).position()
   $('#chart-tooltip').html(data)
   // display the tooltip above and to the right of the selected object
-  $('#chart-tooltip').css('top', (pos.top-$('#chart-tooltip').height()*1.5)+'px').css('left', (pos.left-$('#chart-tooltip').width()/2.0)+'px');
+  $('#chart-tooltip')
+  .css('top', (pos.top-$('#chart-tooltip').height()*1.5)+'px')
+  .css('left', (pos.left-$('#chart-tooltip').width()/2.0)+'px');
   $('#chart-tooltip').show()
 
 };
@@ -542,5 +546,5 @@ var createToolbar = function(data, params) {
 createToolbar(data, params);
 // Append a div container to the #vis div containter. This container will hold our tooltips.
 // Hide the tooltips by default, we'll display them only when the user hovers over a bubble.
-$('#vis').append("<div class='tooltip' id='chart-tooltip'></div>");
+$('#vis').append("<div class='tooltip01' id='chart-tooltip'></div>");
 $('#chart-tooltip').hide();

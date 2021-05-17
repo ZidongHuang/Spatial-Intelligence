@@ -16,11 +16,11 @@ var div2 = d3.select("body").append("div")
 
 var gender_colorScale = d3.scale.ordinal()
                                 .domain(['Male', 'Female', 'Fashion', 'Food', 'ConsumerElectronics', 'Accessories', 'KidsBabies', 'Jewelry'])
-                                .range(['#76B3BD', '#DFA899' , '#8699ba', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#ce9757']);
+                                .range(['#76B3BD', '#DFA899' , '#20639b', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#3caea3']);
 
 var age_colorScale = d3.scale.ordinal()
                                 .domain(['Teenager', 'Youth', 'MiddleAged', 'Senior', 'Fashion', 'Food', 'ConsumerElectronics', 'Accessories', 'KidsBabies', 'Jewelry'])
-                                .range(['#76B3BD', '#DFA899' , '#3D94B8', '#3D6F94', '#8699ba', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#ce9757']);
+                                .range(['#ed553b','#76B3BD', '#DFA899' , '#3D94B8', '#20639b', '#e6ba79', '#da85be', '#aa406a', '#8474bb', '#3caea3']);
 
 var svg = d3.select(".svg1")
             .attr("width", outerWidth)

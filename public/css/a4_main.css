@@ -29,7 +29,7 @@ body {
   }
 
   h1 {
-    font-size:150px sans-serif;
+    font-size:150px 'Tekton Pro';
     margin-left: 10px;
     line-height:0.8em;
     font-weight: bold;
@@ -37,7 +37,7 @@ body {
   }
 
   h2 {
-    font: 15px sans-serif;
+    font: 15px 'Tekton Pro';
     margin-left: 10px;
     line-height:0.2em;
     font-weight: bold;
@@ -71,7 +71,7 @@ body {
   }
 
   .chart {
-    font-family: helvetica;
+    font-family: 'Tekton Pro';
   }
 
   .date_marker {
@@ -99,7 +99,7 @@ body {
     font-family: Tekton Pro;
   }
 
-  .tooltip {
+  .tooltip01 {
     border-radius: 10px;
     padding: 10px;
     position: absolute;
@@ -107,7 +107,7 @@ body {
     background-color: #222;
     opacity: .9;
     z-index: 1;
-    font-family: Tekton Pro;
+    font-family: 'Tekton Pro';
   }
 
   .irs--round .irs-line {
@@ -158,17 +158,17 @@ body {
   }
 
   text {
-    font-family: Tekton Pro;
+    font-family: 'Tekton Pro';
     fill:white;
   }
 
   label {
-    font-family: Tekton Pro;
+    font-family: 'Tekton Pro';
     margin-left: 14px;
   }
 
   select {
-    font-family: Tekton Pro;
+    font-family: 'Tekton Pro';
   }
 
   .show_label {

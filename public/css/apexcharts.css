@@ -1,5 +1,5 @@
 .apexcharts-canvas {
-  position: relative;
+  position: absolute;
   user-select: none;
   /* cannot give overflow: hidden as it will crop tooltips which overflow outside chart area */
 }
@@ -52,6 +52,8 @@
   white-space: nowrap;
   z-index: 12;
   transition: 0.15s ease all;
+  font-family:'Tekton Pro';
+  text-align: center;
 }
 
 .apexcharts-tooltip.apexcharts-active {
@@ -78,6 +80,8 @@
   padding: 6px;
   font-size: 15px;
   margin-bottom: 4px;
+  font-family:'Tekton Pro';
+  text-align: center;
 }
 
 .apexcharts-tooltip.apexcharts-theme-light .apexcharts-tooltip-title {
@@ -154,6 +158,8 @@
 
 .apexcharts-tooltip-candlestick span.value {
   font-weight: bold;
+  font-family:'Tekton Pro';
+  text-align: center;
 }
 
 .apexcharts-tooltip-rangebar {
@@ -169,6 +175,8 @@
   font-weight: bold;
   display: block;
   margin-bottom: 5px;
+  font-family:'Tekton Pro';
+  text-align: center;
 }
 
 .apexcharts-xaxistooltip {
@@ -184,6 +192,8 @@
   background: #ECEFF1;
   border: 1px solid #90A4AE;
   transition: 0.15s ease all;
+  font-family:'Tekton Pro';
+  
 }
 
 .apexcharts-xaxistooltip.apexcharts-theme-dark {
@@ -205,13 +215,13 @@
 
 .apexcharts-xaxistooltip:after {
   border-color: rgba(236, 239, 241, 0);
-  border-width: 6px;
+  border-width: 1px;
   margin-left: -6px;
 }
 
 .apexcharts-xaxistooltip:before {
   border-color: rgba(144, 164, 174, 0);
-  border-width: 7px;
+  border-width: 1px;
   margin-left: -7px;
 }
 
@@ -274,6 +284,8 @@
   z-index: 10;
   background: #ECEFF1;
   border: 1px solid #90A4AE;
+  font-family:'Tekton Pro';
+  text-align: center;
 }
 
 .apexcharts-yaxistooltip.apexcharts-theme-dark {
@@ -301,7 +313,7 @@
 
 .apexcharts-yaxistooltip:before {
   border-color: rgba(144, 164, 174, 0);
-  border-width: 7px;
+  border-width: 1px;
   margin-top: -7px;
 }
 
@@ -518,6 +530,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  font-family:'Tekton Pro';
+  text-align: center;
 }
 
 .apexcharts-menu {
@@ -532,6 +546,8 @@
   min-width: 110px;
   transition: 0.15s ease all;
   pointer-events: none;
+  font-family:'Tekton Pro';
+  text-align: center;
 }
 
 .apexcharts-menu.apexcharts-menu-open {
@@ -541,10 +557,16 @@
 }
 
 .apexcharts-menu-item {
-  padding: 6px 7px;
+  padding: 6px;
   font-size: 12px;
   cursor: pointer;
+  background-color: black;
+  border: 0.3px solid #ddd;
+  border-radius: 3px;
+  font-family:'Tekton Pro';
+  text-align: center;
 }
+
 
 .apexcharts-theme-light .apexcharts-menu-item:hover {
   background: #eee;
@@ -604,7 +626,9 @@
   pointer-events: none;
 }
 
-
+#cirbar-chart text{
+  font-family:"Tekton Pro"
+}
 /* markers */
 
 .apexcharts-marker {
@@ -659,4 +683,8 @@
 .contract-trigger:before {
   width: 200%;
   height: 200%;
+}
+
+#SvgjsText1005{
+  font-family: 'Tekton Pro';
 }

@@ -279,6 +279,10 @@
   padding-right: 8px;
 }
 
+.daterangepicker .drp-selected text{
+  fill:darkblue;
+}
+
 .daterangepicker .drp-buttons .btn {
   margin-left: 8px;
   font-size: 12px;
@@ -288,7 +292,7 @@
 
 .daterangepicker.show-ranges.single.rtl .drp-calendar.left {
   border-right: 1px solid #ddd;
-}
+  }
 
 .daterangepicker.show-ranges.single.ltr .drp-calendar.left {
   border-left: 1px solid #ddd;
@@ -318,6 +322,9 @@
   padding: 0;
   width: 100%;
 }
+
+
+
 
 .daterangepicker .ranges li {
   font-size: 12px;

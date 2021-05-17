@@ -3334,7 +3334,7 @@
               brushScrolled: undefined
             },
             foreColor: '#373d3f',
-            fontFamily: 'Helvetica, Arial, sans-serif',
+            fontFamily: 'Tekton Pro',
             height: 'auto',
             parentHeightOffset: 15,
             redrawOnParentResize: true,
@@ -24058,7 +24058,7 @@
         'stop-color': '#000000',
         // text
         'font-size': 16,
-        'font-family': 'Helvetica, Arial, sans-serif',
+        'font-family': "Tekton Pro",
         'text-anchor': 'start'
       }
     }; // Module for color convertions
