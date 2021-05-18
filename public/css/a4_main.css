@@ -300,17 +300,13 @@ title {
  }
 
  #button01 {
-  left: 60%;
-  top:40%;
-  transform: translateX(0%);
-  position:absolute;
+  position: element('#vis');
+  transform: translate(200px,-45px);
    
 }
 
 #button02 {
-  left: 70%;
-  top:40%;
-  transform: translateX(0%);
-  position:absolute;
+  position: element('#vis');
+  transform: translate(400px,-79px);
    
 }
