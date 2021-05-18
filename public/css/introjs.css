@@ -42,7 +42,7 @@
                 -webkit-box-sizing:content-box;
                 box-sizing:content-box}
                 .introjs-tooltipReferenceLayer{
-                    font-family:"Tekton Pro";
+                    font-family:"helvetica";
                     -webkit-box-sizing:content-box;
                     box-sizing:content-box;position:absolute;
                     visibility:hidden;z-index:100000000;
@@ -50,9 +50,9 @@
                     -webkit-transition:all .3s ease-out;
                     -o-transition:all .3s ease-out;transition:all .3s ease-out}
                     .introjs-tooltipReferenceLayer *{
-                    font-family:"Tekton Pro"}
+                    font-family:"helvetica"}
                     .introjs-helperNumberLayer{
-                    font-family:"Tekton Pro";
+                    font-family:"helvetica";
                     color:#9e9e9e;text-align:center;padding-top:10px;padding-bottom:10px}
                     .introjs-arrow{border:5px solid transparent;content:"";position:absolute}
                     .introjs-arrow.top{top:-10px;left:10px;border-bottom-color:#fff}

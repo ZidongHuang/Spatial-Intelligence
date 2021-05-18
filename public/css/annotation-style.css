@@ -2,7 +2,7 @@
     color: #ffffff;
     line-height: 1.8;
     text-align: center;
-    font-family: "Tekton Pro";
+    font-family: "helvetica";
     font-weight: bold;
     position: absolute;
     width: 25px;
@@ -75,10 +75,10 @@
 }
 
 .xeogl-annotation-title {
-    font: normal 20px 'Tekton Pro';
+    font: normal 20px 'helvetica';
     margin-bottom: 8px;
 }
 
 .xeogl-annotation-desc {
-    font: normal 14px 'Tekton Pro';
+    font: normal 14px 'helvetica';
 }

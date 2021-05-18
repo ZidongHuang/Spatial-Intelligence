@@ -77,7 +77,7 @@ hr {
  * 2. Correct the odd `em` font sizing in all browsers.
  */
 pre {
-  font-family: 'Tekton Pro' ;
+  font-family: 'helvetica' ;
   /* 1 */
   font-size: 1em;
   /* 2 */ }
@@ -208,7 +208,7 @@ input,
 optgroup,
 select,
 textarea {
-  font-family: Tekton Pro;
+  font-family: helvetica;
   /* 1 */
   font-size: 100%;
   /* 1 */

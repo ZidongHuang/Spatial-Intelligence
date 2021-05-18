@@ -25,41 +25,41 @@ body {
   * {
     margin:0;
     padding:0;
-    font-family: Tekton Pro;
+    font-family: helvetica;
   }
 
   h1 {
-    font-size:150px 'Tekton Pro';
+    font-size:150px 'helvetica';
     margin-left: 10px;
     line-height:0.8em;
     font-weight: bold;
-    font-family: Tekton Pro;
+    font-family: helvetica;
   }
 
   h2 {
-    font: 15px 'Tekton Pro';
+    font: 15px 'helvetica';
     margin-left: 10px;
     line-height:0.2em;
     font-weight: bold;
-    font-family: Tekton Pro;
+    font-family: helvetica;
   }
 
   p {
     fill: #8FA2AC;
-    font-family: Tekton Pro;
+    font-family: helvetica;
     font-size: 12px;
   }
 
   .axis text {
     fill: #8FA2AC;
     font: 12px sans-serif;
-    font-family: Tekton Pro;
+    font-family: helvetica;
   }
 
   .axis_title {
     fill: #8FA2AC;
     text-anchor: middle;
-    font-family: Tekton Pro;
+    font-family: helvetica;
   }
 
   .axis path,
@@ -71,7 +71,7 @@ body {
   }
 
   .chart {
-    font-family: 'Tekton Pro';
+    font-family: 'helvetica';
   }
 
   .date_marker {
@@ -81,13 +81,13 @@ body {
   .date_label_top {
     fill: #8FA2AC;
     text-anchor: middle;
-    font-family: Tekton Pro;
+    font-family: helvetica;
   }
 
   .date_label_bottom {
     fill: #8FA2AC;
     text-anchor: middle;
-    font-family: Tekton Pro;
+    font-family: helvetica;
   }
 
   .circle_legend {
@@ -96,7 +96,7 @@ body {
 
   .circle_text {
     fill: #8FA2AC;
-    font-family: Tekton Pro;
+    font-family: helvetica;
   }
 
   .tooltip01 {
@@ -107,7 +107,7 @@ body {
     background-color: #222;
     opacity: .9;
     z-index: 1;
-    font-family: 'Tekton Pro';
+    font-family: 'helvetica';
   }
 
   .irs--round .irs-line {
@@ -137,7 +137,7 @@ body {
   .irs--square .irs-min,
   .irs--square .irs-max {
     color: #333;
-    font-family: Tekton Pro;
+    font-family: helvetica;
     font-size: 14px;
     line-height: 1;
     top: 0;
@@ -147,7 +147,7 @@ body {
   .irs--round .irs-from,
   .irs--round .irs-to,
   .irs--round .irs-single {
-     font-family: Tekton Pro;
+     font-family: helvetica;
      font-size: 14px;
      line-height: 1;
      text-shadow: none;
@@ -158,21 +158,21 @@ body {
   }
 
   text {
-    font-family: 'Tekton Pro';
+    font-family: 'helvetica';
     fill:white;
   }
 
   label {
-    font-family: 'Tekton Pro';
+    font-family: 'helvetica';
     margin-left: 14px;
   }
 
   select {
-    font-family: 'Tekton Pro';
+    font-family: 'helvetica';
   }
 
   .show_label {
-    font-family: Tekton Pro;
+    font-family: helvetica;
   }
 
   .legend_type_color{
@@ -185,7 +185,7 @@ body {
   .legend_label {
     fill: #8FA2AC;
     text-anchor: middle;
-    font-family: Tekton Pro;}
+    font-family: helvetica;}
 
 /* style for toggle */
  .switch {
@@ -249,7 +249,7 @@ body {
    top: 50%;
    left: 50%;
    font-size: 14px;
-   font-family: Tekton Pro, sans-serif;
+   font-family: helvetica, sans-serif;
  }
 
  input:checked+ .slider .on
@@ -263,7 +263,7 @@ body {
  /* Rounded sliders */
  .slider.round {
    border-radius: 34px;
-   font-family: Tekton Pro;
+   font-family: helvetica;
  }
 
  .slider.round:before {

@@ -52,7 +52,7 @@
   white-space: nowrap;
   z-index: 12;
   transition: 0.15s ease all;
-  font-family:'Tekton Pro';
+  font-family:'helvetica';
   text-align: center;
 }
 
@@ -80,7 +80,7 @@
   padding: 6px;
   font-size: 15px;
   margin-bottom: 4px;
-  font-family:'Tekton Pro';
+  font-family:'helvetica';
   text-align: center;
 }
 
@@ -158,7 +158,7 @@
 
 .apexcharts-tooltip-candlestick span.value {
   font-weight: bold;
-  font-family:'Tekton Pro';
+  font-family:'helvetica';
   text-align: center;
 }
 
@@ -175,7 +175,7 @@
   font-weight: bold;
   display: block;
   margin-bottom: 5px;
-  font-family:'Tekton Pro';
+  font-family:'helvetica';
   text-align: center;
 }
 
@@ -192,7 +192,7 @@
   background: #ECEFF1;
   border: 1px solid #90A4AE;
   transition: 0.15s ease all;
-  font-family:'Tekton Pro';
+  font-family:'helvetica';
   
 }
 
@@ -284,7 +284,7 @@
   z-index: 10;
   background: #ECEFF1;
   border: 1px solid #90A4AE;
-  font-family:'Tekton Pro';
+  font-family:'helvetica';
   text-align: center;
 }
 
@@ -530,7 +530,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  font-family:'Tekton Pro';
+  font-family:'helvetica';
   text-align: center;
 }
 
@@ -546,7 +546,7 @@
   min-width: 110px;
   transition: 0.15s ease all;
   pointer-events: none;
-  font-family:'Tekton Pro';
+  font-family:'helvetica';
   text-align: center;
 }
 
@@ -563,7 +563,7 @@
   background-color: black;
   border: 0.3px solid #ddd;
   border-radius: 3px;
-  font-family:'Tekton Pro';
+  font-family:'helvetica';
   text-align: center;
 }
 
@@ -627,7 +627,7 @@
 }
 
 #cirbar-chart text{
-  font-family:"Tekton Pro"
+  font-family:"helvetica"
 }
 /* markers */
 
@@ -686,5 +686,5 @@
 }
 
 #SvgjsText1005{
-  font-family: 'Tekton Pro';
+  font-family: 'helvetica';
 }
