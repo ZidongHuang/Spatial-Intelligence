@@ -2,7 +2,7 @@
 
 ## OVERVIEW
 #### This is the final project "Spatial Intelligence" for MIT-6.859 in spring 2021. We are Fei Xiong, Zidong Huang and Zihui Zhang.
-
+#### 👓 [Project Page](https://6859-sp21.github.io/final-project-spatial-intelligence/)
 #### ☁️ [Visualization Website](http://18.166.102.28:5000/) 
 >🚨 _Please use CHROME Browser and set the zoom rate to 100% for best performance. The AWS Server hosting this site is located in HongKong, so the loading speed might vary according to your location._ 
 >
