@@ -65,5 +65,5 @@ The three charts together are to help the management team understand the custome
 ✅ Data Processing ✅ Sankey Particle Chart ✅ Bubble Chart ✅ "Methods" of Paper
 
 ##### Zihui Zhang:  
-✅ Overall Visual Design ✅ Project Page ✅ Bubble Chart ✅ Video Teaser 
+✅ Overall Visual Design ✅ Project Page ✅ Bubble Chart ✅ Video Teaser ✅ "Results" + "Discussion" + "Future Work" + "Conclusion" of Paper
 
