@@ -12,7 +12,7 @@ Command Line:
 npm install
 npm start
 ```
-#### 📄 Link to Full Paper:
+#### 📄 Link to Full Paper: https://github.com/6859-sp21/final-project-spatial-intelligence/blob/main/6_859_spatial_intelligence_final_paper.pdf
 
 
 ## COMMENTARY ON PROCESS
