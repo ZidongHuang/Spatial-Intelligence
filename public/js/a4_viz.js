@@ -1,7 +1,3 @@
-//flag = 7/4 Wed afternoon
-//newest version with: dynamic scaling, single tooltip, complete dropdown, chained tooltip, click to stay
-//pending: vertical zoom
-
 //Get data
 var data;
 $.ajax({
@@ -13,9 +9,9 @@ $.ajax({
   }
 });
 
-
-var vis_width = window.innerWidth *0.9; // outer width
-var vis_height = window.innerHeight * 0.8; // outer height
+//Initialize Parameters
+var vis_width = window.innerWidth *0.95; // outer width
+var vis_height = window.innerHeight * 0.65; // outer height
 
 var params = {num:'female_number', rate:'female_rate', min_date: "2021-2-1", max_date: "2021-2-28"}; // parameters to customize the chart
 var type_color = {accessories: 1, consumer_electronics: 2, fashions: 3, kids_babies: 4, jewelry: 5, food: 6};
@@ -27,9 +23,6 @@ var margin = {top: 20, right: 60, bottom: 20, left: 60};
 var width = vis_width - margin.left - margin.right, // inner width
     height = vis_height - margin.top - margin.bottom; // inner height
 var comparison = false;
-
-// d3.select('.chart-outer')
-//   .remove()
 
 d3.select('#vis')
   .append('svg')
@@ -98,12 +91,14 @@ svg.append('g')
     .attr('class', 'y axis')
     .attr("id", "yaxis")
     .attr('transform', 'translate(-25, 0)') // translates the axis to the right side of the plot
+    .attr('stroke-width', "2px")
     .call(yAxis)
 
 svg.append('g')
     .attr('class', 'y2 axis')
     .attr("id", "yaxis2")
     .attr('transform', 'translate(' + (width+25) + ',' + 0 + ')') // translates the axis to the right side of the plot
+    .attr('stroke-width', "2px")
     .call(yAxis2)
 
 // Add a title to the Y axis
@@ -126,6 +121,25 @@ var date_labels = [{date: '2021-2-1'},
                    {date: '2021-2-25'},
                    {date: '2021-2-28'}];
 
+var date_labels_minor = [{date: '2021-2-2'},
+                         {date: '2021-2-3'},
+                         {date: '2021-2-5'},
+                         {date: '2021-2-6'},
+                         {date: '2021-2-8'},
+                         {date: '2021-2-9'},
+                         {date: '2021-2-11'},
+                         {date: '2021-2-12'},
+                         {date: '2021-2-14'},
+                         {date: '2021-2-15'},
+                         {date: '2021-2-17'},
+                         {date: '2021-2-18'},
+                         {date: '2021-2-20'},
+                         {date: '2021-2-21'},
+                         {date: '2021-2-23'},
+                         {date: '2021-2-24'},
+                         {date: '2021-2-26'},
+                         {date: '2021-2-27'},];
+
 // Add a marker line for each row in the date_labels table
 svg.selectAll('.date_marker')
     .data(date_labels)
@@ -138,6 +152,18 @@ svg.selectAll('.date_marker')
     .attr('y2', yScaleStatic(100))
     .style('stroke', '#E3E9ED')
 
+svg.selectAll('.date_marker_minor')
+    .data(date_labels_minor)
+    .enter()
+    .append('line')
+    .attr('class', 'date_marker_minor')
+    .attr('y1', yScaleStatic(0))
+    .attr('x1', function(d) {return xScale(new Date(d['date'] ));})
+    .attr('x2', function(d) {return xScale(new Date(d['date'] ));})
+    .attr('y2', yScaleStatic(100))
+    .style('stroke', '#E3E9ED')
+    .style("stroke-dasharray", ("5, 5"))
+
 // Add a label at the top of the date markers
 svg.selectAll('.date_label_top')
     .data(date_labels)
@@ -147,6 +173,7 @@ svg.selectAll('.date_label_top')
     .attr('x', function(d) {return xScale(new Date(d['date'] ));})
     .attr('y', yScaleStatic(100) - 10)
     .text(function(d) {return d['date'].slice(5,10)})
+    .style("font-size", "12px")
 
 // Add a label at the bottom of the date markers
 svg.selectAll('.date_label_bottom')
@@ -157,6 +184,7 @@ svg.selectAll('.date_label_bottom')
     .attr('x', function(d) {return xScale(new Date(d['date'] ));})
     .attr('y', yScaleStatic(0) + 20)
     .text(function(d) {return d['date'].slice(5,10)})
+    .style("font-size", "12px")
 
 var line = d3.line()
              .x(function(d) { return xScale(new Date(d['date'])); })
@@ -214,7 +242,7 @@ for (i = 0; i < storeName.length; i++) {
               .style('stroke-width', 0)
               .style('fill',  function(d) { return myColor(d.type) })
               .style('fill-opacity', 0.7)
-              
+
               .on('mouseover', function(d,i){
                    d3.selectAll("#curve_" + d['store_name']).moveToFront();
                    d3.selectAll("#curve_" + d['store_name']).style("stroke-opacity", 1);
@@ -250,10 +278,10 @@ for (i = 0; i < storeName.length; i++) {
 
                 clicked[d.store_name] = !clicked[d.store_name];
 
-                console.log(d.store_name + " it's click flag is " + clicked[d.store_name])
+                // console.log(d.store_name + " it's click flag is " + clicked[d.store_name])
 
                 if (clicked[d.store_name] === true ){
-                    console.log("drawing " + d.store_name)
+                    // console.log("drawing " + d.store_name)
 
                     d3.selectAll("#text_" + d["store_name"]).filter(function(d,i){return clicked[d.store_name] === true})
                       .clone()
@@ -517,7 +545,7 @@ var createToolbar = function(data, params) {
     var label = toolbar_labels[i_dim];
 
     // create the <select></select> dropdown menu
-    $('#toolbar').append("<div class='form-group'><label for='"+dim+"-var'>"+label+":</label><select class='form-control' id='"+dim+"-var' value='youth_rate'></select></div>")
+    $('#toolbar').append("<div class='form-group'><label for='"+dim+"-var'>"+label+"</label><select class='form-control' id='"+dim+"-var' value='youth_rate'></select></div>")
     // populate the dropdown with the customer label options (<option></option>)
     for(i_label in customerLabel) {
       label_name = customerLabel[i_label];

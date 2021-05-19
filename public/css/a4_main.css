@@ -1,25 +1,10 @@
-  /* This is an example of a CSS comment (only used within the style section) */
+/* This is an example of a CSS comment (only used within the style section) */
 
-  /* Import the Baloo Thambi font from Google Fonts  */
-  @import url('https://fonts.googleapis.com/css?family=Baloo+Thambi');
+/* Import the Baloo Thambi font from Google Fonts  */
+@import url('https://fonts.googleapis.com/css?family=Baloo+Thambi');
 
-  
-  
 body {
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)); 
-  }
-  .form-group {
-    display: inline-block;
-    margin-right: 10px;
-  }
-  
-  .vis{ max-width: 90em;}
-
-  .form-control {
-    display: inline-block;
-    margin-left: 10px;
-    margin-right: 10px;
-    width: 375;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8));
   }
 
   * {
@@ -67,7 +52,7 @@ body {
     fill: none;
     stroke: #8FA2AC;
     shape-rendering: crispEdges;
-    stroke-opacity: 0.4;
+    stroke-opacity: 1;
   }
 
   .chart {
@@ -75,7 +60,12 @@ body {
   }
 
   .date_marker {
-    stroke-width: 1px;
+    stroke-width: 1.5px;
+  }
+
+  .date_marker_minor {
+    stroke-width: 0.5px;
+    opacity: 0.7;
   }
 
   .date_label_top {
@@ -164,7 +154,6 @@ body {
 
   label {
     font-family: 'helvetica';
-    margin-left: 14px;
   }
 
   select {
@@ -175,17 +164,20 @@ body {
     font-family: helvetica;
   }
 
-  .legend_type_color{
-   
-    right: 0px;
+  #legend_type_color{
+
     width: 1000px;
-    vertical-align: left;
+    height: 20px;
+    vertical-align: bottom;
   }
 
-  .legend_label {
-    fill: #8FA2AC;
-    text-anchor: middle;
-    font-family: helvetica;}
+  #legend_bubble_size{
+    height:50px;
+    width: 1000px;
+    vertical-align: bottom;
+  }
+
+
 
 /* style for toggle */
  .switch {
@@ -279,12 +271,10 @@ body {
    bottom: 4px;
    top: 8px;
    color: white;
-   font-size: 12px;
+   font-size: 14px;
    padding: 0;
    border: none;
    }
-
-
 
 title {
    background-image: url('/test.png');
@@ -300,13 +290,28 @@ title {
  }
 
  #button01 {
-  position: element('#vis');
-  transform: translate(200px,-45px);
-   
+  position: absolute;
+  left: 87vw;
+  top: 15vh;
 }
 
 #button02 {
-  position: element('#vis');
-  transform: translate(400px,-79px);
-   
+  position: absolute;
+  left: 75vw;
+  top: 15vh;
+}
+
+.form-group {
+  display: inline-block;
+  position: absolute;
+  left: 5vw;
+  top: 13vh;
+}
+
+.vis{ max-width: 90em;}
+
+.form-control {
+  display: inline-block;
+  padding: 0px;
+  width: 320;
 }

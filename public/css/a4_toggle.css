@@ -3,8 +3,8 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 180px;
-    height: 34px;
+    width: 160px;
+    height: 35px;
   }
 
   .switch input {display:none;}
@@ -27,7 +27,7 @@
     height: 26px;
     width: 26px;
     left: 4px;
-    bottom: 4px;
+    bottom: 5px;
     background-color: white;
     -webkit-transition: .4s;
     transition: .4s;
@@ -44,7 +44,7 @@
   input:checked + .slider:before {
     -webkit-transform: translateX(55px);
     -ms-transform: translateX(55px);
-    transform: translateX(145px);
+    transform: translateX(127px);
   }
 
   /*------ ADDED CSS ---------*/
@@ -60,7 +60,7 @@
     transform: translate(-50%,-50%);
     top: 50%;
     left: 50%;
-    font-size: 12px;
+    font-size: 10px;
     font-family: helvetica;
   }
 
@@ -85,5 +85,5 @@
       top:27%;
       transform: translateY(0%);
       position:absolute;
-      
+
     }
