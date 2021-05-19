@@ -3,16 +3,15 @@
 ## OVERVIEW
 #### This is the final project "Spatial Intelligence" for MIT-6.859 in spring 2021. We are Fei Xiong, Zidong Huang and Zihui Zhang.
 
-#### ☁️ Visualization Website: http://18.166.102.28:5000/
->_Please use CHROME Browser and set the zoom rate to 100% for best performance. The AWS Server hosting this site is located in HongKong, so the loading speed might vary according to your location._ 
-
-#### 💻 Build Locally:
-Command Line:
-```
-npm install
-npm start
-```
-#### 📄 Link to Full Paper: https://github.com/6859-sp21/final-project-spatial-intelligence/blob/main/6_859_spatial_intelligence_final_paper.pdf
+#### ☁️ [Visualization Website](http://18.166.102.28:5000/) 
+>🚨 _Please use CHROME Browser and set the zoom rate to 100% for best performance. The AWS Server hosting this site is located in HongKong, so the loading speed might vary according to your location._ 
+>
+> Build Locally:
+>```
+>npm install
+>npm start
+>```
+#### 📄 [Link to Full Paper](https://github.com/6859-sp21/final-project-spatial-intelligence/blob/main/6_859_spatial_intelligence_final_paper.pdf) 
 
 
 ## COMMENTARY ON PROCESS
@@ -54,7 +53,7 @@ The last 3D model was designed to bring the management team into the most fundam
 
 The three charts together are to help the management team understand the customer flow from different but progressive levels.
 
-#### For more detailes, please refer to our [full paper](url).
+#### For more detailes, please refer to our [full paper](https://github.com/6859-sp21/final-project-spatial-intelligence/blob/main/6_859_spatial_intelligence_final_paper.pdf).
 
 
 ## WORK DIVISION
