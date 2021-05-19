@@ -11,7 +11,7 @@
 >npm install
 >npm start
 >```
-#### 📄 [Link to Full Paper](https://github.com/6859-sp21/final-project-spatial-intelligence/blob/main/6_859_spatial_intelligence_final_paper.pdf) 
+#### 📄 [Link to Full Paper](https://github.com/6859-sp21/final-project-spatial-intelligence/blob/main/6_859_spatial_intelligence_finalpaper.pdf) 
 
 
 ## COMMENTARY ON PROCESS
@@ -53,7 +53,7 @@ The last 3D model was designed to bring the management team into the most fundam
 
 The three charts together are to help the management team understand the customer flow from different but progressive levels.
 
-#### For more detailes, please refer to our [full paper](https://github.com/6859-sp21/final-project-spatial-intelligence/blob/main/6_859_spatial_intelligence_final_paper.pdf).
+#### For more detailes, please refer to our [full paper](https://github.com/6859-sp21/final-project-spatial-intelligence/blob/main/6_859_spatial_intelligence_finalpaper.pdf).
 
 
 ## WORK DIVISION
